@@ -3,7 +3,9 @@
     <TabPane label="首页">
       <Shouye></Shouye>
     </TabPane>
-    <TabPane :lazy="true" label="预约">2</TabPane>
+    <TabPane :lazy="true" label="预约">
+      <Yuyue></Yuyue>
+    </TabPane>
     <TabPane :lazy="true" label="活动">3</TabPane>
     <TabPane :lazy="true" label="我的">4</TabPane>
   </Tabs>
@@ -11,13 +13,15 @@
 
 <script>
 import { Tabs, TabPane } from "element-ui";
-import Shouye from '@/components/Shouye';
+import Shouye from "@/components/Shouye";
+import Yuyue from "@/components/Yuyue";
 export default {
   name: "app",
   components: {
     Tabs,
     TabPane,
-    Shouye
+    Shouye,
+    Yuyue
   },
   data() {
     return {
@@ -41,5 +45,8 @@ body {
 }
 .el-tabs__content {
   flex-grow: 1;
+}
+.el-tab-pane {
+  height: 100%;
 }
 </style>

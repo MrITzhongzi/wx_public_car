@@ -1,29 +1,65 @@
 <template>
-  <div class="top-carousel">
-    <Carousel>
-      <CarouselItem v-for="item in 4" :key="item">
-        <MyImage :src="carouselSrc"></MyImage>
-        <!-- <img :src="carouselSrc" alt=""> -->
-      </CarouselItem>
-    </Carousel>
+  <div>
+    <div class="top-carousel">
+      <Carousel :autoplay="false" height="200px">
+        <CarouselItem v-for="item in 4" :key="item">
+          <MyImage :src="carouselSrc" fit="cover"></MyImage>
+          <!-- <img :src="carouselSrc" alt=""> -->
+        </CarouselItem>
+      </Carousel>
+    </div>
+    <div class="search-box">
+      <Input placeholder="请输入手机号" prefix-icon="el-icon-mobile-phone" v-model="searchContent"/>
+      <Button type="info">预约购车</Button>
+    </div>
 
+    <Card class="box-card" shadow="never">
+      <div slot="header" class="clearfix">
+        <span>
+          <h2 class="my-box-card-title">热门车型</h2>
+        </span>
+      </div>
+      <!-- <div v-for="o in 4" :key="o" class="text item">{{'列表内容 ' + o }}</div> -->
+    </Card>
+
+    <Card class="box-card" shadow="never">
+      <div slot="header" class="clearfix">
+        <span>
+          <h2 class="my-box-card-title">附近门店</h2>
+        </span>
+      </div>
+      <div class="text item">
+        <SimpleCard></SimpleCard>
+      </div>
+    </Card>
+
+    <div class="our-advantage">
+      <ImgCard></ImgCard>
+    </div>
   </div>
 </template>
 
 <script>
-import { Carousel, CarouselItem, Image } from "element-ui";
-
+import { Carousel, CarouselItem, Image, Input, Button, Card } from "element-ui";
+import SimpleCard from "@/components/sub_components/SimpleCard";
+import ImgCard from "@/components/sub_components/ImgCard.vue";
 export default {
   name: "shouye",
   components: {
     Carousel,
     CarouselItem,
-    MyImage: Image
+    MyImage: Image,
+    Input,
+    Button,
+    Card,
+    SimpleCard,
+    ImgCard
   },
   data: function() {
     return {
-      carouselSrc: require('../assets/carousel_img.png'),
-      
+      carouselSrc: require("../assets/carousel_img.png"),
+     
+      searchContent: ""
     };
   }
 };
@@ -31,5 +67,51 @@ export default {
 
 <style>
 .top-carousel {
+}
+
+.el-image > .el-image__inner {
+  height: 200px !important;
+}
+
+.search-box {
+  width: 90%;
+  display: flex;
+  position: relative;
+  top: -20px;
+  left: 5%;
+  z-index: 5;
+}
+
+.el-card__body {
+  padding: 10px;
+  padding-left: 20px;
+}
+
+.my-box-card-title {
+  margin: 0;
+  font-size: 18px;
+}
+
+.text {
+  font-size: 14px;
+}
+
+.item {
+  margin-bottom: 18px;
+}
+
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+}
+.clearfix:after {
+  clear: both;
+}
+
+.box-card {
+  width: 100%;
+  border: none;
+  box-sizing: border-box;
 }
 </style>
