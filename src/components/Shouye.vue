@@ -2,7 +2,7 @@
   <div>
     <div class="top-carousel">
       <Carousel :autoplay="false" height="200px">
-        <CarouselItem v-for="item in 4" :key="item">
+        <CarouselItem v-for="item in 4" :key="item" class="shouye-carousel-img">
           <MyImage :src="carouselSrc" fit="cover"></MyImage>
           <!-- <img :src="carouselSrc" alt=""> -->
         </CarouselItem>
@@ -58,7 +58,7 @@ export default {
   data: function() {
     return {
       carouselSrc: require("../assets/carousel_img.png"),
-     
+      advantageImg: require("../assets/price.png"),
       searchContent: ""
     };
   }
@@ -69,7 +69,7 @@ export default {
 .top-carousel {
 }
 
-.el-image > .el-image__inner {
+.shouye-carousel-img  .el-image__inner {
   height: 200px !important;
 }
 
