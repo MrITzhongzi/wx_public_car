@@ -9,7 +9,9 @@
     <TabPane :lazy="true" label="活动">
       <Huodong></Huodong>
     </TabPane>
-    <TabPane :lazy="true" label="我的">4</TabPane>
+    <TabPane :lazy="true" label="我的">
+      <Wode></Wode>
+    </TabPane>
   </Tabs>
 </template>
 
@@ -17,7 +19,8 @@
 import { Tabs, TabPane } from "element-ui";
 import Shouye from "@/components/Shouye";
 import Yuyue from "@/components/Yuyue";
-import Huodong from "@/components/Huodong"
+import Huodong from "@/components/Huodong";
+import Wode from "@/components/Wode";
 export default {
   name: "app",
   components: {
@@ -25,7 +28,8 @@ export default {
     TabPane,
     Shouye,
     Yuyue,
-    Huodong
+    Huodong,
+    Wode
   },
   data() {
     return {
