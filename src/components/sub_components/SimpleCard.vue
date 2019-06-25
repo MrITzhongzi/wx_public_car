@@ -24,11 +24,11 @@ export default {
   flex-grow: 1;
 }
 .con-detail {
-  font-size: 15px;
+  font-size: 13px;
   color: #333;
 }
 .con-desc {
-  font-size: 13px;
+  font-size: 12px;
   color: #787878;
   margin-top: 10px;
 }

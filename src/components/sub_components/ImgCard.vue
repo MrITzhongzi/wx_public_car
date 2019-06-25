@@ -60,12 +60,12 @@ export default {
 }
 .ad-item-theme h2 {
   font-weight: normal;
-  font-size: 17px;
+  font-size: 14px;
   text-align: center;
   margin: 5px;
 }
 .ad-item-desc {
-  font-size: 14px;
+  font-size: 12px;
   color: #8d8f8a;
   text-align: center;
 }

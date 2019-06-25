@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="top-carousel">
-      <Carousel :autoplay="false" height="200px">
+      <Carousel :autoplay="true" height="200px">
         <CarouselItem v-for="item in 4" :key="item" class="shouye-carousel-img">
           <MyImage :src="carouselSrc" fit="cover"></MyImage>
           <!-- <img :src="carouselSrc" alt=""> -->
@@ -10,7 +10,7 @@
     </div>
     <div class="search-box">
       <Input placeholder="请输入手机号" prefix-icon="el-icon-mobile-phone" v-model="searchContent"/>
-      <Button type="info">预约购车</Button>
+      <Button type="info" style="background: #49494B;">预约购车</Button>
     </div>
 
     <Card class="box-card" shadow="never">
@@ -86,7 +86,11 @@ export default {
   padding: 10px;
   padding-left: 20px;
 }
-
+.box-card .el-card__header {
+  padding-top: 0;
+  padding-bottom: 0;
+  border: none;
+}
 .my-box-card-title {
   margin: 0;
   font-size: 18px;
@@ -113,5 +117,9 @@ export default {
   width: 100%;
   border: none;
   box-sizing: border-box;
+  margin-top: 20px;
+}
+.our-advantage {
+  margin-top: 50px;
 }
 </style>

@@ -1,39 +1,53 @@
 <template>
-  <Tabs :tab-position="tabPosition" :stretch="true" class="tabs-style">
-    <TabPane label="首页">
-      <Shouye></Shouye>
-    </TabPane>
-    <TabPane :lazy="true" label="预约">
-      <Yuyue></Yuyue>
-    </TabPane>
-    <TabPane :lazy="true" label="活动">
-      <Huodong></Huodong>
-    </TabPane>
-    <TabPane :lazy="true" label="我的">
-      <Wode></Wode>
-    </TabPane>
-  </Tabs>
+  <div class="root">
+    <div class="root-content">
+      <router-view/>
+    </div>
+    <div class="root-bottom">
+      <a href="#/" class="root-bottom-item">
+        <div class="root-bottom-top-img">
+          <MyImage :src="bottomImages[0]" class="root-bottom-top-img-con"></MyImage>
+        </div>
+        <div class="root-bottom-desc">首页</div>
+      </a>
+      <a href="#/subscribe" class="root-bottom-item">
+        <div class="root-bottom-top-img">
+          <MyImage :src="bottomImages[1]" class="root-bottom-top-img-con"></MyImage>
+        </div>
+        <div class="root-bottom-desc">预约</div>
+      </a>
+      <a href="#/activity" class="root-bottom-item">
+        <div class="root-bottom-top-img">
+          <MyImage :src="bottomImages[2]" class="root-bottom-top-img-con"></MyImage>
+        </div>
+        <div class="root-bottom-desc">活动</div>
+      </a>
+      <a href="#/my" class="root-bottom-item">
+        <div class="root-bottom-top-img">
+          <MyImage :src="bottomImages[3]" class="root-bottom-top-img-con"></MyImage>
+        </div>
+        <div class="root-bottom-desc">我的</div>
+      </a>
+    </div>
+  </div>
 </template>
 
 <script>
-import { Tabs, TabPane } from "element-ui";
-import Shouye from "@/components/Shouye";
-import Yuyue from "@/components/Yuyue";
-import Huodong from "@/components/Huodong";
-import Wode from "@/components/Wode";
+import { Image } from "element-ui";
+
 export default {
   name: "app",
   components: {
-    Tabs,
-    TabPane,
-    Shouye,
-    Yuyue,
-    Huodong,
-    Wode
+    MyImage: Image
   },
   data() {
     return {
-      tabPosition: "bottom"
+      bottomImages: [
+        require("./assets/index_bottom_icon.png"),
+        require("./assets/subscribe_bottom_icon.png"),
+        require("./assets/present_bottom_icon.png"),
+        require("./assets/user_bottom_icon.png")
+      ]
     };
   }
 };
@@ -46,15 +60,27 @@ body {
   margin: 0;
   padding: 0;
 }
-.tabs-style {
+.root {
+  height: 100%;
   display: flex;
   flex-direction: column;
-  height: 100%;
 }
-.el-tabs__content {
+.root-content {
   flex-grow: 1;
 }
-.el-tab-pane {
-  height: 100%;
+.root-bottom {
+  display: flex;
+  height: 50px;
+  overflow: hidden;
+}
+.root-bottom-item {
+  flex-grow: 1;
+  color: #797979;
+  text-decoration: none;
+  text-align: center;
+  font-size: 13px;
+}
+.root-bottom-top-img-con {
+  width: 25px;
 }
 </style>
