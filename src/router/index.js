@@ -29,6 +29,6 @@ export default new Router({
       path: '/my',
       name: 'test',
       component: Wode
-    },
+    }
   ]
 })
