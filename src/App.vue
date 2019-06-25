@@ -71,6 +71,11 @@ body {
 }
 .root-content {
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+.root-content > div {
+  flex-grow: 1;
 }
 .root-bottom {
   display: flex;

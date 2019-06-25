@@ -1,6 +1,6 @@
 <template>
   <div class="wode-box">
-    <div class="top-box-bg"></div>
+    <div class="top-box-bg" :style="{'background': 'url('+ WodeImgBg +')center/ cover no-repeat'}"></div>
     <div class="wode-content-box">
 
       <div class="login-box">
@@ -63,6 +63,7 @@
 
 <script>
 import { Image } from "element-ui";
+import WodeImgBg from '../assets/banner_bg_v2.png';
 export default {
   components: {
     MyImage: Image
@@ -77,7 +78,8 @@ export default {
         require("../assets/service.png"),
         require("../assets/share.png"),
         require("../assets/safety.png")
-      ]
+      ],
+      WodeImgBg
     };
   }
 };
@@ -88,7 +90,6 @@ export default {
 }
 
 .top-box-bg {
-  background: url("../assets/banner_bg_v2.png") center/ cover no-repeat;
   height: 200px;
 }
 

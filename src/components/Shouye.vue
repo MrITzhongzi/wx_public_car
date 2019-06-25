@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="shouye-box">
     <div class="top-carousel">
       <Carousel :autoplay="true" height="200px">
         <CarouselItem v-for="item in 4" :key="item" class="shouye-carousel-img">

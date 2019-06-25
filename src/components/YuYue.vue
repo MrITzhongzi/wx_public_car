@@ -1,6 +1,6 @@
 <template>
-  <div class="yuyue-box">
-    <div class="yuyue-top">
+  <div class="yuyue-box" style="height: 100%;">
+    <div class="yuyue-top" :style="{'background': 'url('+ YuyueImgBg +')center/ cover no-repeat'}">
       <div class="yueyue-title">
         <p>购车就选宜买车</p>
         <p>7天无理由退订</p>
@@ -29,6 +29,7 @@
 <script>
 // banner_bg_v2.png
 import { Form, FormItem, Input, Button, Select, Option } from "element-ui";
+import YuyueImgBg from '../assets/banner_bg_v2.png';
 export default {
   data: function() {
     return {
@@ -36,7 +37,8 @@ export default {
         name: "",
         phone: "",
         type: ""
-      }
+      },
+      YuyueImgBg
     };
   },
   components: {
@@ -58,10 +60,11 @@ export default {
 .yuyue-box {
   height: 100%;
   width: 100%;
+  min-height: 100%;
+  max-height: 100%;
 }
 .yuyue-top {
-  height: 40%;
-  background: url("../assets/banner_bg_v2.png") center/ cover no-repeat;
+  height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
