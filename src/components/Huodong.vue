@@ -1,8 +1,10 @@
 <template>
   <div class="activity-list">
-    <template v-for="(item, index) in activityImgs" >
+    <template v-for="(item, index) in activityImgs">
       <div class="activity-item" :key="index">
-        <MyImage :src="item" fit="contain" ></MyImage>
+        <a href="#/sign">
+          <MyImage :src="item" fit="contain"></MyImage>
+        </a>
       </div>
     </template>
   </div>
@@ -12,8 +14,12 @@
 import { Image } from "element-ui";
 export default {
   data: function() {
-    return{
-        activityImgs: [require("../assets/activity_1.png"), require("../assets/activity_2.png"), require("../assets/activity_3.png")]
+    return {
+      activityImgs: [
+        require("../assets/activity_1.png"),
+        require("../assets/activity_2.png"),
+        require("../assets/activity_3.png")
+      ]
     };
   },
   components: {
@@ -24,13 +30,11 @@ export default {
 
 <style scoped>
 .activity-list {
-    padding: 20px 20px 0;
+  padding: 20px 20px 0;
 }
 .activity-item {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 .activity-img {
-
 }
-
 </style>

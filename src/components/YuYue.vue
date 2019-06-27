@@ -108,21 +108,21 @@ export default {
         });
     },
     initCarSeries(id) {
-      axios.get("vehicle/allSeries?id=" + id).then(function(response) {
+      // axios.get("vehicle/allSeries?id=" + id).then(function(response) {
 
-        let carSeriesData = response.data;
+      //   let carSeriesData = response.data;
        
-          for (let i = 0; i < carSeriesData.length; i++) {
-            let seriesTemp = {};
+      //     for (let i = 0; i < carSeriesData.length; i++) {
+      //       let seriesTemp = {};
 
-            seriesTemp.value = carSeriesData[i].seriesId;
-            seriesTemp.label = carSeriesData[i].seriesName;
-            seriesTemp.children = [];
+      //       seriesTemp.value = carSeriesData[i].seriesId;
+      //       seriesTemp.label = carSeriesData[i].seriesName;
+      //       seriesTemp.children = [];
 
-            ctx.$data.carSeriesList.push(seriesTemp);
-          }
+      //       ctx.$data.carSeriesList.push(seriesTemp);
+      //     }
 
-      });
+      // });
     }
     // async initCar
   }

@@ -6,6 +6,8 @@ import Yuyue from '@/components/Yuyue'
 import Huodong from '@/components/Huodong'
 import Wode from '@/components/Wode'
 
+import Sign from '@/components/Huodong/Sign.vue'
+
 Vue.use(Router)
 
 export default new Router({
@@ -17,18 +19,23 @@ export default new Router({
     },
     {
       path: '/subscribe',
-      name: 'test',
+      name: 'subscribe',
       component: Yuyue
     },
     {
       path: '/activity',
-      name: 'test',
+      name: 'activity',
       component: Huodong
     },
     {
       path: '/my',
-      name: 'test',
+      name: 'my',
       component: Wode
+    },
+    {
+      path: '/sign',
+      name: 'sign',
+      component: Sign
     }
   ]
 })
