@@ -74,6 +74,7 @@ body {
   display: flex;
   height: 1px;
   flex-direction: column;
+  overflow-y: scroll;
 }
 .root-content > div {
   flex-grow: 1;
