@@ -72,6 +72,7 @@ body {
 .root-content {
   flex-grow: 1;
   display: flex;
+  height: 1px;
   flex-direction: column;
 }
 .root-content > div {

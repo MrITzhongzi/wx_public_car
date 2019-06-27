@@ -91,6 +91,7 @@ export default {
 <style>
 .sign-box {
   padding-bottom: 30px;
+  box-sizing: border-box;
 }
 .packet {
 }
