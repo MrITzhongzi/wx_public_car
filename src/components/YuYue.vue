@@ -15,18 +15,7 @@
           <Input v-model="form.phone" placeholder="请填写手机号码"/>
         </FormItem>
         <FormItem label="车辆型号">
-          <Select v-model="form.type" placeholder="请选择车辆型号">
-            <Option label="区域一" value="shanghai"></Option>
-            <Option label="区域二" value="beijing"></Option>
-          </Select>
-        </FormItem>
-        <FormItem label="车辆型号">
-          <Cascader
-            v-model="value"
-            :options="carBeandList"
-            @change="handleChange"
-            class="car-brand-list"
-          ></Cascader>
+          <Cascader v-model="value" @change="handleChange" class="car-brand-list" :props="props"></Cascader>
         </FormItem>
 
         <Button type="info" @click="onSubmit" :style="{width: '100%', background: '#49494b'}">立即预约</Button>
@@ -48,11 +37,13 @@ import {
 } from "element-ui";
 import axios from "axios";
 import YuyueImgBg from "../assets/banner_bg_v2.png";
+
 export default {
   mounted() {
     this.initCarBrand();
   },
   data: function() {
+    let ctx = this;
     return {
       form: {
         name: "",
@@ -61,9 +52,50 @@ export default {
       },
       YuyueImgBg,
       value: [],
-      carBeandList: [], //车辆品牌列表
-      carSeriesList: [], // 车辆某个品牌的系列
-      carModelList: [] //车辆某个系列的某个型号
+      carBrand: "", //车辆品牌列表
+      carSerie: "", // 车辆某个品牌的系列
+      carModel: "", //车辆某个系列的某个型号
+      propsLevel: 0,
+      props: {
+        lazy: true,
+        async lazyLoad(node, resolve) {
+          const { level } = node;
+          
+          console.log("level", level);
+          console.log("node", node);
+          if (level == 0) {
+            let { data } = node;
+            const nodes = (await ctx.initCarBrand()).map(item => ({
+              value: item.brandid,
+              label: item.name,
+              leaf: level >= 2
+            }));
+            resolve(nodes);
+          }
+
+          if (level == 1) {
+            let { data } = node;
+            const nodes = (await ctx.initCarSeries(data.value)).map(item => ({
+              value: item.seriesId,
+              label: item.seriesName,
+              leaf: level >= 2
+            }));
+            resolve(nodes);
+          }
+
+          if (level == 2) {
+            let { data } = node;
+            console.log(data);
+            console.log(await ctx.initCarModels(data.value));
+            const nodes = (await ctx.initCarModels(data.value)).map(item => ({
+              value: item.modelId,
+              label: item.modelName,
+              leaf: level >= 2
+            }));
+            resolve(nodes);
+          }
+        }
+      }
     };
   },
   components: {
@@ -82,49 +114,15 @@ export default {
     handleChange(value) {
       console.log(value);
     },
-    initCarBrand() {
-      const ctx = this;
-      axios
-        .get("/vehicle/allBrands")
-        .then(function(response) {
-          let carBrandData = response.data;
-          console.log(carBrandData);
-
-          for (let i = 0; i < carBrandData.length; i++) {
-            let brandTemp = {};
-
-            brandTemp.value = carBrandData[i].brandid;
-            brandTemp.label = carBrandData[i].name;
-            brandTemp.children = [];
-
-            ctx.$data.carBeandList.push(brandTemp);
-          }
-        })
-        .catch(function(error) {
-          console.log(error);
-        })
-        .then(function() {
-          // always executed
-        });
+    async initCarBrand() {
+      return (await axios.get("/vehicle/allBrands")).data;
     },
-    initCarSeries(id) {
-      // axios.get("vehicle/allSeries?id=" + id).then(function(response) {
-
-      //   let carSeriesData = response.data;
-       
-      //     for (let i = 0; i < carSeriesData.length; i++) {
-      //       let seriesTemp = {};
-
-      //       seriesTemp.value = carSeriesData[i].seriesId;
-      //       seriesTemp.label = carSeriesData[i].seriesName;
-      //       seriesTemp.children = [];
-
-      //       ctx.$data.carSeriesList.push(seriesTemp);
-      //     }
-
-      // });
+    async initCarSeries(id) {
+      return (await axios.get("vehicle/allSeries?id=" + id)).data;
+    },
+    async initCarModels(id) {
+      return (await axios.get("/vehicle/allModels?id=" + id)).data;
     }
-    // async initCar
   }
 };
 </script>
