@@ -3,7 +3,7 @@
     <div class="top-box-bg" :style="{'background': 'url('+ WodeImgBg +')center/ cover no-repeat'}"></div>
     <div class="wode-content-box">
 
-      <div class="login-box">
+      <div class="login-box" @click="login">
         <div class="username">未登录</div>
         <div class="login-header">
           <i class="el-icon-user-solid"></i>
@@ -81,6 +81,13 @@ export default {
       ],
       WodeImgBg
     };
+  },
+  methods: {
+    login: function(event){
+      alert(1);
+      const appId = "wx02548bbef1a53020";
+      window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appId}&redirect_uri=${"https://www.baidu.com/"}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`;
+    }
   }
 };
 </script>
