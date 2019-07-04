@@ -2,7 +2,6 @@
   <div class="wode-box">
     <div class="top-box-bg" :style="{'background': 'url('+ WodeImgBg +')center/ cover no-repeat'}"></div>
     <div class="wode-content-box">
-
       <div class="login-box" @click="login">
         <div class="username">未登录</div>
         <div class="login-header">
@@ -33,7 +32,9 @@
           </div>
           <div class="ser-item-right">
             <div class="ser-item-right-desc">周一至周五 9:00~18:00</div>
-            <div  class="ser-item-right-icon"><i class="el-icon-arrow-right"></i></div>
+            <div class="ser-item-right-icon">
+              <i class="el-icon-arrow-right"></i>
+            </div>
           </div>
         </div>
         <div class="service-item">
@@ -43,7 +44,9 @@
           </div>
           <div class="ser-item-right">
             <!-- <div class="ser-item-right-desc">周一至周五 9:00~18:00</div> -->
-            <div  class="ser-item-right-icon"><i class="el-icon-arrow-right"></i></div>
+            <div class="ser-item-right-icon">
+              <i class="el-icon-arrow-right"></i>
+            </div>
           </div>
         </div>
         <div class="service-item">
@@ -53,7 +56,9 @@
           </div>
           <div class="ser-item-right">
             <!-- <div class="ser-item-right-desc">周一至周五 9:00~18:00</div> -->
-            <div class="ser-item-right-icon"><i class="el-icon-arrow-right"></i></div>
+            <div class="ser-item-right-icon">
+              <i class="el-icon-arrow-right"></i>
+            </div>
           </div>
         </div>
       </div>
@@ -63,10 +68,13 @@
 
 <script>
 import { Image } from "element-ui";
-import WodeImgBg from '../assets/banner_bg_v2.png';
+import WodeImgBg from "../assets/banner_bg_v2.png";
 export default {
   components: {
     MyImage: Image
+  },
+  mounted: function() {
+    alert("22222");
   },
   data: function() {
     return {
@@ -83,10 +91,11 @@ export default {
     };
   },
   methods: {
-    login: function(event){
-      alert(1);
+    login: function(event) {
+      alert(3);
       const appId = "wx02548bbef1a53020";
-      window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appId}&redirect_uri=${"https://www.baidu.com/"}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`;
+      const backUrl = encodeURI("http://xiaopeng.natapp1.cc");
+      window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appId}&redirect_uri=${backUrl}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`;
     }
   }
 };
@@ -149,7 +158,6 @@ export default {
 }
 
 .service-list {
-
 }
 .service-item {
   display: flex;
@@ -175,7 +183,6 @@ export default {
   color: #adadad;
 }
 .ser-item-right-desc {
-  
 }
 .ser-item-right-icon {
   font-size: 15px;
