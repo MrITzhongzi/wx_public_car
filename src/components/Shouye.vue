@@ -46,11 +46,6 @@ import ImgCard from "@/components/sub_components/ImgCard.vue";
 export default {
   name: "shouye",
   mounted: function(){
-    let MyUrl = new URL(window.location.href);
-    let urlParams = MyUrl.search;
-    let searchParams = new URLSearchParams(urlParams);
-    let wxCode = searchParams.get("code");
-    alert(JSON.stringify(wxCode));
      
   },
   components: {

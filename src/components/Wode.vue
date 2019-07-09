@@ -74,7 +74,7 @@ export default {
     MyImage: Image
   },
   mounted: function() {
-    alert("22222");
+    
   },
   data: function() {
     return {
@@ -91,12 +91,7 @@ export default {
     };
   },
   methods: {
-    login: function(event) {
-      alert(3);
-      const appId = "wx02548bbef1a53020";
-      const backUrl = encodeURI("http://xiaopeng.natapp1.cc");
-      window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appId}&redirect_uri=${backUrl}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`;
-    }
+    
   }
 };
 </script>
