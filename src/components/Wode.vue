@@ -2,7 +2,7 @@
   <div class="wode-box">
     <div class="top-box-bg" :style="{'background': 'url('+ WodeImgBg +')center/ cover no-repeat'}"></div>
     <div class="wode-content-box">
-      <div class="login-box" @click="login">
+      <div class="login-box" >
         <div class="username">未登录</div>
         <div class="login-header">
           <i class="el-icon-user-solid"></i>

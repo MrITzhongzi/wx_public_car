@@ -4,8 +4,17 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import './plugins/element.js'
+import AMap from 'vue-amap'
 
+Vue.use(AMap)
 Vue.config.productionTip = false
+// 初始化vue-amap
+AMap.initAMapApiLoader({
+  // 高德key
+  key: '518f4668ca5f354185885be70c6cc731',
+  // 插件集合 （插件按需引入）
+  plugin: ['AMap.Geolocation']
+})
 
 /* eslint-disable no-new */
 new Vue({

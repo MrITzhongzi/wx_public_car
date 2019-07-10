@@ -7,6 +7,7 @@ import Huodong from '@/components/Huodong'
 import Wode from '@/components/Wode'
 
 import Sign from '@/components/Huodong/Sign.vue'
+import MyMap from '@/components/shouye/Map'
 
 Vue.use(Router)
 
@@ -36,6 +37,11 @@ export default new Router({
       path: '/sign',
       name: 'sign',
       component: Sign
+    },
+    {
+      path: '/map',
+      name: 'map',
+      component: MyMap
     }
   ]
 })
