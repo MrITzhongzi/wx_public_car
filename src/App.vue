@@ -6,27 +6,27 @@
     <div class="root-bottom">
       <a href="#/" class="root-bottom-item">
         <div class="root-bottom-top-img">
-          <MyImage :src="bottomImages[ this.$route.path == '/' ? 1 : 0]" class="root-bottom-top-img-con"></MyImage>
+          <MyImage :src="bottomImages[ shouyePaths.indexOf(this.$route.path) > -1 ? 1 : 0]" class="root-bottom-top-img-con"></MyImage>
         </div>
-        <div :class="['root-bottom-desc', this.$route.path == '/' ? 'blue-color' : '']">首页</div>
+        <div :class="['root-bottom-desc',shouyePaths.indexOf(this.$route.path) > -1 ? 'blue-color' : '']">首页</div>
       </a>
       <a href="#/subscribe" class="root-bottom-item">
         <div class="root-bottom-top-img">
-          <MyImage :src="bottomImages[ this.$route.path == '/subscribe' ? 3 : 2]" class="root-bottom-top-img-con"></MyImage>
+          <MyImage :src="bottomImages[  yuyuePaths.indexOf(this.$route.path) > -1  ? 3 : 2]" class="root-bottom-top-img-con"></MyImage>
         </div>
-        <div :class="['root-bottom-desc', this.$route.path == '/subscribe' ? 'blue-color' : '']">预约</div>
+        <div :class="['root-bottom-desc',  yuyuePaths.indexOf(this.$route.path) > -1 ? 'blue-color' : '']">预约</div>
       </a>
       <a href="#/activity" class="root-bottom-item">
         <div class="root-bottom-top-img">
-          <MyImage :src="bottomImages[ this.$route.path == '/activity' ? 5 : 4]" class="root-bottom-top-img-con"></MyImage>
+          <MyImage :src="bottomImages[  huodongPaths.indexOf(this.$route.path) > -1  ? 5 : 4]" class="root-bottom-top-img-con"></MyImage>
         </div>
-        <div :class="['root-bottom-desc', this.$route.path == '/activity' ? 'blue-color' : '']">活动</div>
+        <div :class="['root-bottom-desc',  huodongPaths.indexOf(this.$route.path) > -1  ? 'blue-color' : '']">活动</div>
       </a>
       <a href="#/my" class="root-bottom-item">
         <div class="root-bottom-top-img">
-          <MyImage :src="bottomImages[ this.$route.path == '/my' ? 7 : 6]" class="root-bottom-top-img-con"></MyImage>
+          <MyImage :src="bottomImages[  myPaths.indexOf(this.$route.path) > -1  ? 7 : 6]" class="root-bottom-top-img-con"></MyImage>
         </div>
-        <div :class="['root-bottom-desc', this.$route.path == '/my' ? 'blue-color' : '']">我的</div>
+        <div :class="['root-bottom-desc',  myPaths.indexOf(this.$route.path) > -1  ? 'blue-color' : '']">我的</div>
       </a>
     </div>
   </div>
@@ -51,7 +51,11 @@ export default {
         require("./assets/present_bottom_icon_activity.png"),
         require("./assets/user_bottom_icon.png"),
         require("./assets/user_bottom_icon_activity.png"), 
-      ]
+      ],
+      shouyePaths: ["/","/map"],
+      yuyuePaths: ["/subscribe"],
+      huodongPaths: ["/activity"],
+      myPaths: ["/my"]
     };
   }
 };

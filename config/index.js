@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/': {//代理api  代理所有的接口
-        target: "http://106.14.216.58:8088/",//服务器api地址
+        target: "http://xiaopeng.natapp1.cc/",//服务器api地址
         changeOrigin: true,//是否跨域
         ws: false, // proxy websockets
         pathRewrite: {//重写路径

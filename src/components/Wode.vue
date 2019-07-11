@@ -2,11 +2,19 @@
   <div class="wode-box">
     <div class="top-box-bg" :style="{'background': 'url('+ WodeImgBg +')center/ cover no-repeat'}"></div>
     <div class="wode-content-box">
-      <div class="login-box" >
-        <div class="username">未登录</div>
-        <div class="login-header">
-          <i class="el-icon-user-solid"></i>
-        </div>
+      <div class="login-box" @click="login">
+        <template v-if="true">
+          <div class="username">未登录</div>
+          <div class="login-header">
+            <i class="el-icon-user-solid"></i>
+          </div>
+        </template>
+        <template v-else>
+          <div class="username">未登录</div>
+          <div class="login-header">
+            <i class="el-icon-user-solid"></i>
+          </div>
+        </template>
       </div>
 
       <div class="person-infos">
@@ -68,14 +76,13 @@
 
 <script>
 import { Image } from "element-ui";
+import axios from "axios";
 import WodeImgBg from "../assets/banner_bg_v2.png";
 export default {
   components: {
     MyImage: Image
   },
-  mounted: function() {
-    
-  },
+  mounted: function() {},
   data: function() {
     return {
       personInfoImages: [
@@ -91,7 +98,16 @@ export default {
     };
   },
   methods: {
-    
+    login: function() {
+      // let user = (await axios.get("/weixin/login")).data;
+      // console.log(user);
+      
+      axios.get("/weixin/login")
+        .then(function(response) {
+          // handle success
+          console.log(response);
+        });
+    }
   }
 };
 </script>

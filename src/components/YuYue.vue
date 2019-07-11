@@ -159,6 +159,10 @@ export default {
   box-shadow: 1px 1px 1px #ccc;
 }
 
+.car-brand-list {
+  width: 100%;
+}
+
 .el-cascader-menu__list {
   max-height: 400px;
 }
