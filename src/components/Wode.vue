@@ -101,12 +101,27 @@ export default {
     login: function() {
       // let user = (await axios.get("/weixin/login")).data;
       // console.log(user);
-      
-      axios.get("/weixin/login")
-        .then(function(response) {
-          // handle success
-          console.log(response);
-        });
+      const ctx = this;
+      axios.get("/user/userIndex").then(function(response) {
+        // handle success
+        console.log(response);
+        const code = response.data.code;
+        if (code == 0) {
+          alert("登陆成功");
+        } else if (code == -1) {
+
+        } else if (code == -2) {
+          console.log(window.location.origin);
+          // window.location.href = window.location.origin + "/weixin/login";
+          ctx.getUserInfo();
+        }
+      });
+    },
+    getUserInfo: function(){
+      axios.get("/weixin/login").then(function(response) {
+        // handle success
+        console.log(response);
+      });
     }
   }
 };
