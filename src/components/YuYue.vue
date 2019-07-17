@@ -61,8 +61,6 @@ export default {
         async lazyLoad(node, resolve) {
           const { level } = node;
           
-          console.log("level", level);
-          console.log("node", node);
           if (level == 0) {
             let { data } = node;
             const nodes = (await ctx.initCarBrand()).map(item => ({
@@ -85,8 +83,6 @@ export default {
 
           if (level == 2) {
             let { data } = node;
-            console.log(data);
-            console.log(await ctx.initCarModels(data.value));
             const nodes = (await ctx.initCarModels(data.value)).map(item => ({
               value: item.modelId,
               label: item.modelName,

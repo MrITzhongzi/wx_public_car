@@ -3,10 +3,10 @@
     <div class="top-box-bg" :style="{'background': 'url('+ WodeImgBg +')center/ cover no-repeat'}"></div>
     <div class="wode-content-box">
       <div class="login-box" @click="login">
-        <template v-if="true">
-          <div class="username">未登录</div>
+        <template v-if="isLogin">
+          <div class="username">{{userInfo.nickName}}</div>
           <div class="login-header">
-            <i class="el-icon-user-solid"></i>
+            <MyImage style="border-radius: 50%;" :src="userInfo.headImage"></MyImage>
           </div>
         </template>
         <template v-else>
@@ -82,7 +82,16 @@ export default {
   components: {
     MyImage: Image
   },
-  mounted: function() {},
+  mounted: function() {
+    let loginData = JSON.parse(localStorage.getItem("yhqc"));
+    if (loginData) {
+      let userInfo = loginData.userinfo;
+      this.userInfo = userInfo;
+      this.isLogin = true;
+    } else {
+      this.isLogin = false;
+    }
+  },
   data: function() {
     return {
       personInfoImages: [
@@ -94,31 +103,15 @@ export default {
         require("../assets/share.png"),
         require("../assets/safety.png")
       ],
-      WodeImgBg
+      WodeImgBg,
+      isLogin: false,
+      userInfo: {}
     };
   },
   methods: {
-    login: function() {
-      // let user = (await axios.get("/weixin/login")).data;
-      // console.log(user);
-      const ctx = this;
-      axios.get("/user/userIndex").then(function(response) {
-        // handle success
-        console.log(response);
-        const code = response.data.code;
-        if (code == 0) {
-          alert("登陆成功");
-        } else if (code == -1) {
-
-        } else if (code == -2) {
-          console.log(window.location.origin);
-          // window.location.href = window.location.origin + "/weixin/login";
-          ctx.getUserInfo();
-        }
-      });
-    },
-    getUserInfo: function(){
-      axios.get("/weixin/login").then(function(response) {
+    login: function() {},
+    getUserInfo: function() {
+      axios.get("/weixin/login", {}).then(function(response) {
         // handle success
         console.log(response);
       });

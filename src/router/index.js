@@ -9,7 +9,6 @@ import Wode from '@/components/Wode'
 import Sign from '@/components/Huodong/Sign.vue'
 import MyMap from '@/components/shouye/Map'
 
-import WeixinBackPage from '@/components/wxpage/WeixinBackPage'
 
 Vue.use(Router)
 
@@ -44,11 +43,6 @@ export default new Router({
       path: '/map',
       name: 'map',
       component: MyMap
-    },
-    {
-      path: '/weixinbackpage',
-      name: 'weixinBackPage',
-      component: WeixinBackPage
     }
   ]
 })
