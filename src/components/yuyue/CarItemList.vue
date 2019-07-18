@@ -3,9 +3,9 @@
     <div class="caritemlist-title">{{listName}}</div>
     <div class="caritemlist-con">
       <template v-for="(item, index) in carItemList">
-        <div class="caritem-con" @click="showSeries" :key="index">
+        <div class="caritem-con" @click="showSeries"  :key="index">
           <div class="caritem-image-box">
-            <MyImage class="caritem-image" :src="TestImage"></MyImage>
+            <MyImage class="caritem-image" :src="item.brandImage"></MyImage>
           </div>
           <div class="carItem-name">{{item.name}}</div>
         </div>
@@ -22,15 +22,15 @@ export default {
   components: {
     MyImage: Image
   },
-  data: function(){
-      return {
-          TestImage
-      };
+  data: function() {
+    return {
+      TestImage
+    };
   },
   methods: {
-      showSeries: function(){
-          
-      }
+    showSeries: function() {
+      this.$emit("update", 1)
+    }
   }
 };
 </script>
@@ -42,7 +42,7 @@ export default {
 .caritemlist-title {
 }
 .caritemlist-con {
-    margin-top: 3px;
+  margin-top: 3px;
 }
 .caritem-con {
   display: flex;
