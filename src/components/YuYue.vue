@@ -9,13 +9,18 @@
     <div class="reister-box">
       <Form ref="form" :model="form" label-width="80px">
         <FormItem label="姓名">
-          <Input v-model="form.name" placeholder="请填写姓名"/>
+          <Input v-model="form.name" placeholder="请填写姓名" />
         </FormItem>
         <FormItem label="手机号码">
-          <Input v-model="form.phone" placeholder="请填写手机号码"/>
+          <Input v-model="form.phone" placeholder="请填写手机号码" />
         </FormItem>
         <FormItem label="车辆型号">
           <Cascader v-model="value" @change="handleChange" class="car-brand-list" :props="props"></Cascader>
+        </FormItem>
+        <FormItem label="车辆型号2">
+          <div  @click.capture="chooseCarModel">
+            <Input :disabled="true" style="background: white;" placeholder="请选择车辆型号" />
+          </div>
         </FormItem>
 
         <Button type="info" @click="onSubmit" :style="{width: '100%', background: '#49494b'}">立即预约</Button>
@@ -60,7 +65,7 @@ export default {
         lazy: true,
         async lazyLoad(node, resolve) {
           const { level } = node;
-          
+
           if (level == 0) {
             let { data } = node;
             const nodes = (await ctx.initCarBrand()).map(item => ({
@@ -68,6 +73,7 @@ export default {
               label: item.name,
               leaf: level >= 2
             }));
+            console.log(node);
             resolve(nodes);
           }
 
@@ -118,6 +124,10 @@ export default {
     },
     async initCarModels(id) {
       return (await axios.get("/vehicle/allModels?id=" + id)).data;
+    },
+    chooseCarModel: function() {
+      
+      this.$router.push("/carlist");
     }
   }
 };
