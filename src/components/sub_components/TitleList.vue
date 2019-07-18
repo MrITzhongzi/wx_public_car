@@ -1,7 +1,7 @@
 <template>
   <div class="title-list-box">
       <div class="list-title">
-          <div class="title-con">名字</div>
+          <div class="title-con">{{listName}}</div>
           <div class="go-back">返回</div>
       </div>
       <div class="list-con">
@@ -17,7 +17,7 @@
 
 <script>
 export default {
-    props: ["list"]
+    props: ["list", "listName"]
 };
 </script>
 

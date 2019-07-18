@@ -5,7 +5,7 @@
     </template>
     <div class="left-nav-box">
       <div class="left-nav-series" >
-        <TitleLIst :list="1"></TitleLIst>
+        <TitleLIst :list="allSeries" :listName="brandName"></TitleLIst>
       </div>
     </div>
   </div>
@@ -33,15 +33,17 @@ export default {
   data: function() {
     return {
       allBrand: {},
-      allSeries: []
+      allSeries: [],
+      brandName: "",
     };
   },
   methods: {
     async initCarBrand() {
       return (await axios.get("/vehicle/allBrands")).data;
     },
-    async getCarSeries(id){
-      this.allSeries = (await axios.get("vehicle/allSeries?id=" + id)).data;
+    async getCarSeries(item){
+      this.allSeries = (await axios.get("vehicle/allSeries?id=" + item.brandid)).data;
+      this.brandName = item.name;
       this.$forceUpdate();
     },
     sortData: function(obj) {

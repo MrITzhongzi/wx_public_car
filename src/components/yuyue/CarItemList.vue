@@ -3,7 +3,12 @@
     <div class="caritemlist-title">{{listName}}</div>
     <div class="caritemlist-con">
       <template v-for="(item, index) in carItemList">
-        <div class="caritem-con" @click="showSeries"  :key="index">
+        <div
+          class="caritem-con"
+          @click="showSeries(item)"
+          :data-seriesid="item.brandid"
+          :key="index"
+        >
           <div class="caritem-image-box">
             <MyImage class="caritem-image" :src="item.brandImage"></MyImage>
           </div>
@@ -28,8 +33,9 @@ export default {
     };
   },
   methods: {
-    showSeries: function() {
-      this.$emit("update", 1)
+    showSeries: function(item) {
+     
+        this.$emit("update", item);
     }
   }
 };
