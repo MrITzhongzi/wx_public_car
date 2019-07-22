@@ -14,12 +14,15 @@
         <FormItem label="手机号码">
           <Input v-model="form.phone" placeholder="请填写手机号码" />
         </FormItem>
-        <FormItem label="车辆型号">
-          <Cascader v-model="value" @change="handleChange" class="car-brand-list" :props="props"></Cascader>
-        </FormItem>
         <FormItem label="车辆型号2">
-          <div  @click.capture="chooseCarModel">
-            <Input :disabled="true" style="background: white;" placeholder="请选择车辆型号" />
+          <div @click.capture="chooseCarModel">
+            <Input
+              :disabled="true"
+              :value="chooseCarTypeValue"
+              style="background: white;"
+              class="choose-car-type"
+              placeholder="请选择车辆型号"
+            />
           </div>
         </FormItem>
 
@@ -46,6 +49,7 @@ import YuyueImgBg from "../assets/banner_bg_v2.png";
 export default {
   mounted() {
     this.initCarBrand();
+    this.initChooseCar();
   },
   data: function() {
     let ctx = this;
@@ -56,48 +60,7 @@ export default {
         type: ""
       },
       YuyueImgBg,
-      value: [],
-      carBrand: "", //车辆品牌列表
-      carSerie: "", // 车辆某个品牌的系列
-      carModel: "", //车辆某个系列的某个型号
-      propsLevel: 0,
-      props: {
-        lazy: true,
-        async lazyLoad(node, resolve) {
-          const { level } = node;
-
-          if (level == 0) {
-            let { data } = node;
-            const nodes = (await ctx.initCarBrand()).map(item => ({
-              value: item.brandid,
-              label: item.name,
-              leaf: level >= 2
-            }));
-            console.log(node);
-            resolve(nodes);
-          }
-
-          if (level == 1) {
-            let { data } = node;
-            const nodes = (await ctx.initCarSeries(data.value)).map(item => ({
-              value: item.seriesId,
-              label: item.seriesName,
-              leaf: level >= 2
-            }));
-            resolve(nodes);
-          }
-
-          if (level == 2) {
-            let { data } = node;
-            const nodes = (await ctx.initCarModels(data.value)).map(item => ({
-              value: item.modelId,
-              label: item.modelName,
-              leaf: level >= 2
-            }));
-            resolve(nodes);
-          }
-        }
-      }
+      chooseCarTypeValue: ""
     };
   },
   components: {
@@ -113,9 +76,7 @@ export default {
     onSubmit() {
       console.log("submit!");
     },
-    handleChange(value) {
-      console.log(value);
-    },
+
     async initCarBrand() {
       return (await axios.get("/vehicle/allBrands")).data;
     },
@@ -126,8 +87,12 @@ export default {
       return (await axios.get("/vehicle/allModels?id=" + id)).data;
     },
     chooseCarModel: function() {
-      
       this.$router.push("/carlist");
+    },
+    initChooseCar: function() {
+      if (this.$route.params.nameList && this.$route.params.idList) {
+        this.chooseCarTypeValue = this.$route.params.nameList.join(" ");
+      }
     }
   }
 };
@@ -165,11 +130,10 @@ export default {
   box-shadow: 1px 1px 1px #ccc;
 }
 
-.car-brand-list {
-  width: 100%;
-}
-
 .el-cascader-menu__list {
   max-height: 400px;
+}
+.choose-car-type > input {
+  color: black!important;
 }
 </style>

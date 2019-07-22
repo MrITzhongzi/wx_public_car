@@ -1,15 +1,47 @@
 <template>
   <div class="carlist-box" :style="{height: navHeight + 'px',overflow: 'scroll'}">
-    <template v-for='(value, index) in ["A","B","C","D","E","F","G","H","I","G","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]'>
-      <CarItemList :key="index" :carItemList="allBrand[value]" v-on:update="getCarSeries" :listName="value"></CarItemList>
+    <template
+      v-for="(value, index) in ['A','B','C','D','E','F','G','H','I','G','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']"
+    >
+      <CarItemList
+        :key="index"
+        :carItemList="allBrand[value]"
+        v-on:update="getCarSeries"
+        :listName="value"
+      ></CarItemList>
     </template>
-    <div class="left-nav-box">
-      <div class="left-nav-series" >
-        <TitleLIst :list="allSeries" :listName="brandName"></TitleLIst>
+    <div
+      class="left-nav-box"
+      :style="{display: leftNavSeriesShow ? 'block':'none'}"
+      @click.self="hideModal"
+    >
+      <div class="left-nav-series">
+        <TitleLIst
+          :list="allSeries"
+          :listName="brandName"
+          name="seriesName"
+          v-on:updateView="getDataToUpdateView"
+          v-on:back="clearData"
+        ></TitleLIst>
+      </div>
+    </div>
+
+    <div
+      class="left-second-nav-box"
+      :style="{display: leftSecondNavShow ? 'block':'none'}"
+      @click.self="hideModal"
+    >
+      <div class="left-nav-modal">
+        <TitleLIst
+          :list="allModal"
+          :listName="modalName"
+          name="modelName"
+          v-on:updateView="getDataToUpdateView"
+          v-on:back="clearData"
+        ></TitleLIst>
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -35,16 +67,65 @@ export default {
       allBrand: {},
       allSeries: [],
       brandName: "",
+      leftNavSeriesShow: false,
+      allModal: [],
+      modalName: "",
+      leftSecondNavShow: false,
+      choosedCar: {
+        nameList: [],
+        idList: []
+      }
     };
   },
   methods: {
     async initCarBrand() {
       return (await axios.get("/vehicle/allBrands")).data;
     },
-    async getCarSeries(item){
-      this.allSeries = (await axios.get("vehicle/allSeries?id=" + item.brandid)).data;
+    async getCarSeries(item) {
+      this.allSeries = (await axios.get(
+        "vehicle/allSeries?id=" + item.brandid
+      )).data;
       this.brandName = item.name;
+      this.leftNavSeriesShow = true;
+
+      this.choosedCar.nameList.push(item.name);
+      this.choosedCar.idList.push(item.brandid);
+
       this.$forceUpdate();
+    },
+    async getCarModal(item) {
+     
+      this.allModal = (await axios.get(
+        "/vehicle/allModels?id=" + item.seriesId
+      )).data;
+        
+      this.modalName = item.seriesName;
+      this.leftNavSeriesShow = false;
+      this.leftSecondNavShow = true;
+      
+      this.choosedCar.nameList.push(item.seriesName);
+      this.choosedCar.idList.push(item.seriesId);
+
+      this.$forceUpdate();
+    },
+    async getDataToUpdateView(item) {
+     
+      if (this.leftSecondNavShow) {
+        
+        this.choosedCar.nameList.push(item.modelName);
+        this.choosedCar.idList.push(item.modelId);
+        
+        this.$router.push({ name: 'subscribe', params: this.choosedCar});
+      } else {
+        await this.getCarModal(item);
+      }
+    },
+    clearData: function() {
+      
+      this.allModal = [];
+      this.allSeries = [];
+      this.choosedCar = { nameList: [], idList: [] };
+      
     },
     sortData: function(obj) {
       let brandData = this.allBrand;
@@ -52,10 +133,16 @@ export default {
         brandData[obj.bfirstletter] = [];
       }
       brandData[obj.bfirstletter].push(obj);
+    },
+    hideModal: function() {
+      
+      this.leftNavSeriesShow = false;
+      this.leftSecondNavShow = false;
+      this.clearData();
     }
   },
   computed: {
-    navHeight: function(){
+    navHeight: function() {
       return document.body.clientHeight - 50;
     }
   }
@@ -65,18 +152,18 @@ export default {
 <style scoped>
 .carlist-box {
   position: relative;
-  
 }
-.left-nav-box {
+.left-nav-box,
+.left-second-nav-box {
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.3);
-  display: none;
 }
-.left-nav-series {
+.left-nav-series,
+.left-nav-modal {
   height: 100%;
   position: absolute;
   right: 0;
