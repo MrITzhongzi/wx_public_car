@@ -10,12 +10,13 @@
         :listName="value"
       ></CarItemList>
     </template>
+
     <div
       class="left-nav-box"
       :style="{display: leftNavSeriesShow ? 'block':'none'}"
       @click.self="hideModal"
     >
-      <div class="left-nav-series">
+      <div :class="['left-nav-series','animated', 'fadeInRightBig']" >
         <TitleLIst
           :list="allSeries"
           :listName="brandName"
@@ -31,7 +32,8 @@
       :style="{display: leftSecondNavShow ? 'block':'none'}"
       @click.self="hideModal"
     >
-      <div class="left-nav-modal">
+      <div
+      :class="['left-nav-modal','animated', 'fadeInRightBig']" >
         <TitleLIst
           :list="allModal"
           :listName="modalName"
@@ -48,6 +50,7 @@
 import axios from "axios";
 import CarItemList from "@/components/yuyue/CarItemList";
 import TitleLIst from "@/components/sub_components/TitleList";
+import animate from 'animate.css';
 
 export default {
   beforeMount: async function() {
@@ -74,7 +77,8 @@ export default {
       choosedCar: {
         nameList: [],
         idList: []
-      }
+      },
+
     };
   },
   methods: {
@@ -90,42 +94,38 @@ export default {
 
       this.choosedCar.nameList.push(item.name);
       this.choosedCar.idList.push(item.brandid);
-
+      
       this.$forceUpdate();
+      
     },
     async getCarModal(item) {
-     
       this.allModal = (await axios.get(
         "/vehicle/allModels?id=" + item.seriesId
       )).data;
-        
+
       this.modalName = item.seriesName;
       this.leftNavSeriesShow = false;
       this.leftSecondNavShow = true;
-      
+
       this.choosedCar.nameList.push(item.seriesName);
       this.choosedCar.idList.push(item.seriesId);
 
       this.$forceUpdate();
     },
     async getDataToUpdateView(item) {
-     
       if (this.leftSecondNavShow) {
-        
         this.choosedCar.nameList.push(item.modelName);
         this.choosedCar.idList.push(item.modelId);
-        
-        this.$router.push({ name: 'subscribe', params: this.choosedCar});
+
+        this.$router.push({ name: "subscribe", params: this.choosedCar });
       } else {
         await this.getCarModal(item);
       }
     },
     clearData: function() {
-      
       this.allModal = [];
       this.allSeries = [];
       this.choosedCar = { nameList: [], idList: [] };
-      
     },
     sortData: function(obj) {
       let brandData = this.allBrand;
@@ -135,7 +135,6 @@ export default {
       brandData[obj.bfirstletter].push(obj);
     },
     hideModal: function() {
-      
       this.leftNavSeriesShow = false;
       this.leftSecondNavShow = false;
       this.clearData();
@@ -166,6 +165,7 @@ export default {
 .left-nav-modal {
   height: 100%;
   position: absolute;
-  right: 0;
+  right: 0px;
 }
+
 </style>
