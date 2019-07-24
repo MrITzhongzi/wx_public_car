@@ -5,6 +5,9 @@ import App from './App'
 import router from './router'
 import './plugins/element.js'
 import AMap from 'vue-amap'
+// 全局变量
+import global_ from './components/config/GlobalParams'
+Vue.prototype.GLOBAL = global_
 
 Vue.use(AMap)
 Vue.config.productionTip = false

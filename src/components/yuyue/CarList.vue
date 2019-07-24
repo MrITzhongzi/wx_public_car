@@ -1,5 +1,8 @@
 <template>
-  <div class="carlist-box" :style="{height: navHeight + 'px',overflow: 'scroll'}">
+  <div
+    class="carlist-box"
+    :style="{height: navHeight + 'px',overflow: (leftNavSeriesShow&&leftSecondNavShow) ? 'scroll' : 'hidden'}"
+  >
     <template
       v-for="(value, index) in ['A','B','C','D','E','F','G','H','I','G','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']"
     >
@@ -16,7 +19,7 @@
       :style="{display: leftNavSeriesShow ? 'block':'none'}"
       @click.self="hideModal"
     >
-      <div :class="['left-nav-series','animated', 'fadeInRightBig']" >
+      <div :class="['left-nav-series','animated', 'fadeInRightBig']">
         <TitleLIst
           :list="allSeries"
           :listName="brandName"
@@ -32,8 +35,7 @@
       :style="{display: leftSecondNavShow ? 'block':'none'}"
       @click.self="hideModal"
     >
-      <div
-      :class="['left-nav-modal','animated', 'fadeInRightBig']" >
+      <div :class="['left-nav-modal','animated', 'fadeInRightBig']">
         <TitleLIst
           :list="allModal"
           :listName="modalName"
@@ -50,7 +52,7 @@
 import axios from "axios";
 import CarItemList from "@/components/yuyue/CarItemList";
 import TitleLIst from "@/components/sub_components/TitleList";
-import animate from 'animate.css';
+import animate from "animate.css";
 
 export default {
   beforeMount: async function() {
@@ -77,8 +79,7 @@ export default {
       choosedCar: {
         nameList: [],
         idList: []
-      },
-
+      }
     };
   },
   methods: {
@@ -94,9 +95,8 @@ export default {
 
       this.choosedCar.nameList.push(item.name);
       this.choosedCar.idList.push(item.brandid);
-      
+
       this.$forceUpdate();
-      
     },
     async getCarModal(item) {
       this.allModal = (await axios.get(
@@ -166,6 +166,7 @@ export default {
   height: 100%;
   position: absolute;
   right: 0px;
+  overflow: scroll;
+  background: white;
 }
-
 </style>

@@ -45,11 +45,14 @@ import {
 } from "element-ui";
 import axios from "axios";
 import YuyueImgBg from "../assets/banner_bg_v2.png";
+import GlobalParams from "./config/GlobalParams";
 
 export default {
-  mounted() {
-    this.initCarBrand();
+  async mounted() {
+    this.$attrs.show();
+    await this.initCarBrand();
     this.initChooseCar();
+    this.$attrs.hide();
   },
   data: function() {
     let ctx = this;
@@ -134,6 +137,6 @@ export default {
   max-height: 400px;
 }
 .choose-car-type > input {
-  color: black!important;
+  color: black !important;
 }
 </style>
