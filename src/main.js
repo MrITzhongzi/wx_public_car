@@ -16,7 +16,7 @@ AMap.initAMapApiLoader({
   // 高德key
   key: '518f4668ca5f354185885be70c6cc731',
   // 插件集合 （插件按需引入）
-  plugin: ['AMap.Geolocation']
+  plugin: ['AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PlaceSearch', 'AMap.Geolocation']
 })
 
 /* eslint-disable no-new */
