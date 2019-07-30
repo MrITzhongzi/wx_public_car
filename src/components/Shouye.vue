@@ -29,7 +29,7 @@
     <Card class="box-card" shadow="never">
       <div slot="header" class="clearfix">
         <span>
-          <h2 class="my-box-card-title">附近门店{{code}}</h2>
+          <h2 class="my-box-card-title">附近门店</h2>
         </span>
       </div>
       <div class="text item">
@@ -63,7 +63,7 @@ export default {
         this.initHotCar();
       } else {
         //去微信服务器获取code
-        this.loginAutho();
+        // this.loginAutho();
       }
     }
   },

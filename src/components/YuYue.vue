@@ -2,7 +2,7 @@
   <div class="yuyue-box" style="height: 100%;">
     <div class="yuyue-top" :style="{'background': 'url('+ YuyueImgBg +')center/ cover no-repeat'}">
       <div class="yueyue-title">
-        <p>购车就选宜买车</p>
+        <p>购车就选英豪汽车</p>
         <p>7天无理由退订</p>
       </div>
     </div>
@@ -49,10 +49,7 @@ import GlobalParams from "./config/GlobalParams";
 
 export default {
   async mounted() {
-    this.$attrs.show();
-    await this.initCarBrand();
     this.initChooseCar();
-    this.$attrs.hide();
   },
   data: function() {
     let ctx = this;
@@ -78,16 +75,6 @@ export default {
   methods: {
     onSubmit() {
       console.log("submit!");
-    },
-
-    async initCarBrand() {
-      return (await axios.get("/vehicle/allBrands")).data;
-    },
-    async initCarSeries(id) {
-      return (await axios.get("vehicle/allSeries?id=" + id)).data;
-    },
-    async initCarModels(id) {
-      return (await axios.get("/vehicle/allModels?id=" + id)).data;
     },
     chooseCarModel: function() {
       this.$router.push("/carlist");
@@ -118,6 +105,7 @@ export default {
   font-size: 25px;
   font-weight: bold;
   color: white;
+  text-align: center;
 }
 .yueyue-title p {
   margin: 5px 0;

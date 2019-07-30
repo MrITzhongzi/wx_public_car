@@ -1,7 +1,7 @@
 <template>
   <div
     class="carlist-box"
-    :style="{height: navHeight + 'px',overflow: (leftNavSeriesShow&&leftSecondNavShow) ? 'scroll' : 'hidden'}"
+    :style="{height: navHeight + 'px',overflow: (leftNavSeriesShow||leftSecondNavShow) ? 'hidden' :'scroll'}"
   >
     <template
       v-for="(value, index) in ['A','B','C','D','E','F','G','H','I','G','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']"
@@ -55,13 +55,15 @@ import TitleLIst from "@/components/sub_components/TitleList";
 import animate from "animate.css";
 
 export default {
-  beforeMount: async function() {
+  mounted: async function() {
+    this.$attrs.show();
     let brandData = await this.initCarBrand();
     let tempArr = [];
     for (let i = 0; i < brandData.length; i++) {
       this.sortData(brandData[i]);
     }
     this.$forceUpdate();
+    this.$attrs.hide();
   },
   components: {
     CarItemList,
@@ -114,9 +116,10 @@ export default {
     },
     async getDataToUpdateView(item) {
       if (this.leftSecondNavShow) {
+
         this.choosedCar.nameList.push(item.modelName);
         this.choosedCar.idList.push(item.modelId);
-
+        
         this.$router.push({ name: "subscribe", params: this.choosedCar });
       } else {
         await this.getCarModal(item);

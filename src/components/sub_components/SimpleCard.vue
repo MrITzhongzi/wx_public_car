@@ -1,9 +1,9 @@
 <template>
   <div class="lhw-simple-card">
-    <a class="left-con" href="#/map">
+    <div class="left-con" @click="goMap">
       <div class="con-detail">山东烟台莱山区.体验店</div>
       <div class="con-desc">山东烟台烟台市莱山区万光小区18号楼</div>
-    </a>
+    </div>
     <div class="right-icon">
       <i class="el-icon-arrow-right"></i>
     </div>
@@ -12,7 +12,21 @@
 
 <script>
 export default {
-    
+  data: function(){
+    return {
+     
+    }
+  },
+  methods: {
+    goMap: function() {
+      this.$router.push({
+        name: "map",
+        params: {
+          
+        }
+      });
+    }
+  }
 };
 </script>
 
@@ -21,8 +35,6 @@ export default {
   display: flex;
 }
 .left-con {
-  color: black;
-  text-decoration: none;
   flex-grow: 1;
 }
 .con-detail {
