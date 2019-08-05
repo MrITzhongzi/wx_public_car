@@ -9,6 +9,7 @@ import Wode from '@/components/Wode'
 import Sign from '@/components/Huodong/Sign.vue'
 import MyMap from '@/components/shouye/Map'
 import CarList from '@/components/yuyue/CarList'
+import SignComponent from '@/components/shouye/CalendarPage'
 
 Vue.use(Router)
 
@@ -48,6 +49,11 @@ export default new Router({
       path: '/carlist',
       name: 'carlist',
       component: CarList
+    },
+    {
+      path: '/signcomponent',
+      name: 'SignComponent',
+      component: SignComponent
     }
   ]
 })

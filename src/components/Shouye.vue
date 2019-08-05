@@ -13,6 +13,10 @@
       <Button type="info" style="background: #49494B;">预约购车</Button>
     </div>
 
+    <a style="padding-left: 20px;" href="/#/signcomponent">
+      <Button type="info" style="background: green;">签到</Button>
+    </a>
+
     <Card class="box-card" shadow="never">
       <div slot="header" class="clearfix">
         <span>
@@ -20,7 +24,7 @@
         </span>
       </div>
       <div class="text item">
-        <template v-for="(item, index) in hotCar" >
+        <template v-for="(item, index) in hotCar">
           <HotCarItem :key="index" :carItem="item"></HotCarItem>
         </template>
       </div>
@@ -48,7 +52,7 @@ import { Carousel, CarouselItem, Image, Input, Button, Card } from "element-ui";
 import SimpleCard from "@/components/sub_components/SimpleCard";
 import ImgCard from "@/components/sub_components/ImgCard.vue";
 import HotCarItem from "@/components/shouye/HotCarItem";
-
+import axios from 'axios'
 export default {
   name: "shouye",
   mounted: async function() {
@@ -63,7 +67,7 @@ export default {
         this.initHotCar();
       } else {
         //去微信服务器获取code
-        // this.loginAutho();
+        this.loginAutho();
       }
     }
   },
@@ -85,7 +89,7 @@ export default {
       searchContent: "",
       state: "", // 微信回调带的状态码
       code: "",
-      hotCar: [], // 热门车型
+      hotCar: [] // 热门车型
     };
   },
   methods: {
@@ -118,7 +122,6 @@ export default {
         .then(function(response) {
           ctx.hotCar = response.data.cars;
           localStorage.setItem("yhqc", JSON.stringify(response.data));
-          
         });
     }
   }
