@@ -75,7 +75,7 @@ export default {
         require("./assets/user_bottom_icon.png"),
         require("./assets/user_bottom_icon_activity.png")
       ],
-      shouyePaths: ["/", "/map"],
+      shouyePaths: ["/", "/map","/signcomponent"],
       yuyuePaths: ["/subscribe","/carlist"],
       huodongPaths: ["/activity"],
       myPaths: ["/my"],

@@ -16,6 +16,9 @@
     <a style="padding-left: 20px;" href="/#/signcomponent">
       <Button type="info" style="background: green;">签到</Button>
     </a>
+    
+    <Button type="info" @click="shareuser" style="background: green;">分享</Button>
+   
 
     <Card class="box-card" shadow="never">
       <div slot="header" class="clearfix">
@@ -52,7 +55,8 @@ import { Carousel, CarouselItem, Image, Input, Button, Card } from "element-ui";
 import SimpleCard from "@/components/sub_components/SimpleCard";
 import ImgCard from "@/components/sub_components/ImgCard.vue";
 import HotCarItem from "@/components/shouye/HotCarItem";
-import axios from 'axios'
+import axios from "axios";
+ import wx from 'weixin-js-sdk';
 export default {
   name: "shouye",
   mounted: async function() {
@@ -67,9 +71,19 @@ export default {
         this.initHotCar();
       } else {
         //去微信服务器获取code
-        this.loginAutho();
+        // this.loginAutho();
       }
     }
+
+    wx.config({
+      debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+      appId: 'wx15a02fa0c05302e9', // 必填，公众号的唯一标识
+      timestamp: "21212", // 必填，生成签名的时间戳
+      nonceStr: '212121212', // 必填，生成签名的随机串
+      signature: '',// 必填，签名
+      jsApiList: [] // 必填，需要使用的JS接口列表
+    });
+    
   },
   components: {
     Carousel,
@@ -123,6 +137,9 @@ export default {
           ctx.hotCar = response.data.cars;
           localStorage.setItem("yhqc", JSON.stringify(response.data));
         });
+    },
+    shareuser: function(){
+      console.log(222)
     }
   }
 };
