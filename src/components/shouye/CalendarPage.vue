@@ -39,7 +39,7 @@ export default {
         let tmp = [];
         if (response.data.data.dateList) {
           for (let i = 0; i < response.data.data.dateList.length; i++) {
-            tmp.push( ctx.formartDate(response.data.data.dateList[i]));
+            tmp.push(ctx.formartDate(response.data.data.dateList[i]));
           }
         }
 
@@ -85,7 +85,7 @@ export default {
         signdays: data.signdays,
         todaysign: data.todaysign
       };
-      
+
       axios
         .get("/integral/userSign", {
           params: {
@@ -151,7 +151,12 @@ export default {
   width: 90%;
   height: 50px;
   border-radius: 25px;
+  background: -webkit-linear-gradient(left, #73c509, #97ce24);
+  background: -o-linear-gradient(left, #73c509, #97ce24);
+  background: -moz-linear-gradient(left, #73c509, #97ce24);
+  background: -ms-linear-gradient(left, #73c509, #97ce24);
   background-image: linear-gradient(left, #73c509, #97ce24);
+  background-color: #73c509;
   text-align: center;
   margin: 20px auto;
   line-height: 50px;
@@ -174,7 +179,12 @@ export default {
 }
 .my-calendar-cell-content.is-selected {
   color: white;
+  background: -webkit-linear-gradient(left, #97ce24, #73c509);
+  background: -o-linear-gradient(left, #97ce24, #73c509);
+  background: -moz-linear-gradient(left, #97ce24, #73c509);
+  background: -ms-linear-gradient(left, #97ce24, #73c509);
   background-image: linear-gradient(left, #97ce24, #73c509);
+  background-color: #73c509;
 }
 .calendar-bottom {
   text-align: center;
@@ -193,6 +203,11 @@ export default {
   text-align: center;
   line-height: 45px;
   margin: 10px auto;
+  background: -webkit-linear-gradient(left, #78c60e, #94cf23);
+  background: -o-linear-gradient(left, #78c60e, #94cf23);
+  background: -moz-linear-gradient(left, #78c60e, #94cf23);
+  background: -ms-linear-gradient(left, #78c60e, #94cf23);
   background-image: linear-gradient(left, #78c60e, #94cf23);
+  background-color: #73c509;
 }
 </style>
