@@ -137,7 +137,6 @@ export default {
       this.code = code ? code : "";
     },
     getUserToken: async function() {
-      alert("userid"+this.userId);
       const ctx = this;
       let responseData = (await axios.get("/weixin/getTokenByCode", {
         params: {
@@ -148,13 +147,13 @@ export default {
 
       if (responseData.code == 0) {
         ctx.getUserInfo();
-        alert("0")
+
         return;
       }
       if (responseData.code == -1) {
         // 用户信息不存在，重新获取 code
         ctx.getUserinfoCodeToWx();
-        alert("-1")
+
         return;
       }
       if (responseData.code == 2) {
@@ -181,23 +180,7 @@ export default {
         return;
       }
       const loginData = JSON.parse(localStorage.getItem("yhqc"));
-      axios
-        .get("/user/getWxJSConfig", {
-          params: { url: window.location.href.split("#")[0] }
-        })
-        .then(function(response) {
-          let resData = response.data;
-          console.log("resData", resData);
 
-          wx.config({
-            debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-            appId: resData.appId, // 必填，公众号的唯一标识
-            timestamp: resData.timestamp, // 必填，生成签名的时间戳
-            nonceStr: resData.nonceStr, // 必填，生成签名的随机串
-            signature: resData.signature, // 必填，签名
-            jsApiList: ["updateAppMessageShareData"] // 必填，需要使用的JS接口列表
-          });
-        });
       wx.checkJsApi({
         jsApiList: ["updateAppMessageShareData"], // 需要检测的JS接口列表，所有JS接口列表见附录2,
         success: function(res) {
@@ -215,20 +198,27 @@ export default {
           imgUrl: "http://xiaopeng.natapp1.cc/logo.jpeg", // 分享图标
           success: function() {
             // 设置成功
-            alert("分享ok");
+          }
+        });
+        //自定义“分享到朋友圈”及“分享到QQ空间”按钮的分享内容
+         wx.updateTimelineShareData({
+          title: "这是标题", 
+          link: serverlUrl + `?userid=${loginData.userinfo.id}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+          imgUrl: "http://xiaopeng.natapp1.cc/logo.jpeg", // 分享图标
+          success: function() {
+            // 设置成功
           }
         });
       });
+
     },
     getReferrer: function(keyName) {
-      alert(window.location.href);
       let url = window.location.href.split("#")[0];
       let myUrl = new URL(url);
       let searchParams = new URLSearchParams(myUrl.search);
       let userid = searchParams.get(keyName);
       console.log(userid);
       this.userId = userid ? userid : 0;
-      alert("getUSERID" + this.userId);
     },
     clearlocal: function() {
       localStorage.clear();
