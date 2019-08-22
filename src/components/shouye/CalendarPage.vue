@@ -32,9 +32,9 @@ Vue.component(ButtonGroup.name, ButtonGroup);
 export default {
   beforeMount: async function() {
     const ctx = this;
-    //   const openId = JSON.parse(localStorage.getItem('yhqc')).userinfo.openId;
+      const openId = JSON.parse(localStorage.getItem('yhqc')).userinfo.openId;
     await axios
-      .get("/integral/getSignInfo?openId=o8Hzb1bR8aSfsq_HiLYzHSQJu09w")
+      .get("/integral/getSignInfo?openId=" + openId)
       .then(function(response) {
         let tmp = [];
         if (response.data.data.dateList) {
