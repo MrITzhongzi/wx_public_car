@@ -57,6 +57,7 @@ import animate from "animate.css";
 export default {
   mounted: async function() {
     this.$attrs.show();
+    this.getParams();
     let brandData = await this.initCarBrand();
     let tempArr = [];
     for (let i = 0; i < brandData.length; i++) {
@@ -71,6 +72,7 @@ export default {
   },
   data: function() {
     return {
+      params: {},
       allBrand: {},
       allSeries: [],
       brandName: "",
@@ -119,8 +121,8 @@ export default {
 
         this.choosedCar.nameList.push(item.modelName);
         this.choosedCar.idList.push(item.modelId);
-        
-        this.$router.push({ name: "subscribe", params: this.choosedCar });
+        let params = {name: this.params.name, phone : this.params.phone, nameList: this.choosedCar.nameList, idList: this.choosedCar.idList};
+        this.$router.push({ name: "subscribe", params: params });
       } else {
         await this.getCarModal(item);
       }
@@ -141,6 +143,9 @@ export default {
       this.leftNavSeriesShow = false;
       this.leftSecondNavShow = false;
       this.clearData();
+    },
+    getParams: function(){
+      this.params = this.$route.params;
     }
   },
   computed: {

@@ -33,6 +33,18 @@
       </div>
 
       <div class="service-list">
+        <a class="service-item" href="#/referrer">
+          <div class="ser-item-left">
+            <MyImage :src="serviceImages[2]" class="service-item-image"></MyImage>
+            <div class="ser-item-desc">我的推荐人</div>
+          </div>
+          <div class="ser-item-right">
+            <!-- <div class="ser-item-right-desc">周一至周五 9:00~18:00</div> -->
+            <div class="ser-item-right-icon">
+              <i class="el-icon-arrow-right"></i>
+            </div>
+          </div>
+        </a>
         <div class="service-item">
           <div class="ser-item-left">
             <MyImage :src="serviceImages[0]" class="service-item-image"></MyImage>
@@ -71,7 +83,6 @@
         </div>
       </div>
     </div>
-    
   </div>
 </template>
 
@@ -79,6 +90,7 @@
 import { Image } from "element-ui";
 import axios from "axios";
 import WodeImgBg from "../assets/banner_bg_v2.png";
+
 export default {
   components: {
     MyImage: Image
@@ -183,6 +195,8 @@ export default {
   display: flex;
   align-items: center;
   margin-top: 30px;
+  text-decoration: none;
+  color: black;
 }
 .ser-item-left {
   display: flex;

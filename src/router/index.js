@@ -10,6 +10,7 @@ import Sign from '@/components/Huodong/Sign.vue'
 import MyMap from '@/components/shouye/Map'
 import CarList from '@/components/yuyue/CarList'
 import SignComponent from '@/components/shouye/CalendarPage'
+import ReferrerCar from '@/components/wode/Referrer'
 
 Vue.use(Router)
 
@@ -54,6 +55,11 @@ export default new Router({
       path: '/signcomponent',
       name: 'SignComponent',
       component: SignComponent
+    },
+    {
+      path: '/referrer',
+      name: 'referrer',
+      component: ReferrerCar
     }
   ]
 })

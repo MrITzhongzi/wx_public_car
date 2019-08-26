@@ -7,12 +7,12 @@
       </div>
     </div>
     <div class="reister-box">
-      <Form ref="form" :model="form" label-width="80px">
+      <Form ref="form" label-width="80px">
         <FormItem label="姓名">
-          <Input v-model="form.name" placeholder="请填写姓名" />
+          <Input v-model="name" placeholder="请填写姓名" />
         </FormItem>
         <FormItem label="手机号码">
-          <Input v-model="form.phone" placeholder="请填写手机号码" />
+          <Input v-model="phone" placeholder="请填写手机号码" />
         </FormItem>
         <FormItem label="车辆型号2">
           <div @click.capture="chooseCarModel">
@@ -41,7 +41,8 @@ import {
   Button,
   Select,
   Option,
-  Cascader
+  Cascader,
+  Message
 } from "element-ui";
 import axios from "axios";
 import YuyueImgBg from "../assets/banner_bg_v2.png";
@@ -54,13 +55,11 @@ export default {
   data: function() {
     let ctx = this;
     return {
-      form: {
-        name: "",
-        phone: "",
-        type: ""
-      },
+      name: "",
+      phone: "",
       YuyueImgBg,
-      chooseCarTypeValue: ""
+      chooseCarTypeValue: "",
+      modelId: ""
     };
   },
   components: {
@@ -70,19 +69,63 @@ export default {
     Button,
     Select,
     Option,
-    Cascader
+    Cascader,
+    Message
   },
   methods: {
     onSubmit() {
-      console.log("submit!");
+      if (!this.name) {
+        Message({
+          message: "请填写姓名。",
+          type: "warning"
+        });
+        return;
+      }
+      if (!this.phone) {
+        Message({
+          message: "请填写电话。",
+          type: "warning"
+        });
+        return;
+      }
+      if (!this.chooseCarTypeValue) {
+        Message({
+          message: "请选择车辆型号。",
+          type: "warning"
+        });
+        return;
+      }
+
+      this.reserveCar();
     },
     chooseCarModel: function() {
-      this.$router.push("/carlist");
+
+      this.$router.push({name: "carlist", params: {name: this.name, phone: this.phone}});
     },
     initChooseCar: function() {
       if (this.$route.params.nameList && this.$route.params.idList) {
         this.chooseCarTypeValue = this.$route.params.nameList.join(" ");
+        this.modelId = this.$route.params.idList[2];
+        this.name = this.$route.params.name;
+        this.phone = this.$route.params.phone;
       }
+    },
+    reserveCar: async function() {
+      let localData = JSON.parse(localStorage.getItem("yhqc"));
+      const userId = localData.userinfo.id;
+      const resData = await axios.get("/vehicle/saveVehicle", { params: {modelId: this.modelId,mobile: this.phone,name: this.name, userid: userId} });
+      if(resData.data.code == 0) {
+        Message({
+          message: "预约成功。工作人员将在一到三个工作日内与您取得联系。",
+          type: "success"
+        });
+      }else {
+        Message({
+          message: "预约失败，请稍后重试。",
+          type: "error"
+        });
+      }
+      
     }
   }
 };
