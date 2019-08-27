@@ -2,7 +2,7 @@
   <div class="wode-box">
     <div class="top-box-bg" :style="{'background': 'url('+ WodeImgBg +')center/ cover no-repeat'}"></div>
     <div class="wode-content-box">
-      <div class="login-box" @click="login">
+      <div class="login-box">
         <template v-if="isLogin">
           <div class="username">{{userInfo.nickName}}</div>
           <div class="login-header">
@@ -17,16 +17,14 @@
         </template>
       </div>
 
-      <div class="person-infos">
+      <div class="person-infos" >
+        <a class="person-info-item" href="#/scoredetail">
+          <div class="my-score">{{isLogin ? myScore : 0}}</div>
+          <div class="person-info-desc">我的积分</div>
+        </a>
         <div class="person-info-item">
           <div class="person-info-img">
             <my-image :src="personInfoImages[0]" class="person-info-image-con"></my-image>
-          </div>
-          <div class="person-info-desc">我的意见</div>
-        </div>
-        <div class="person-info-item">
-          <div class="person-info-img">
-            <my-image :src="personInfoImages[1]" class="person-info-image-con"></my-image>
           </div>
           <div class="person-info-desc">我的订单</div>
         </div>
@@ -101,6 +99,7 @@ export default {
       let userInfo = loginData.userinfo;
       this.userInfo = userInfo;
       this.isLogin = true;
+      this.getScore();
     } else {
       this.isLogin = false;
     }
@@ -108,7 +107,7 @@ export default {
   data: function() {
     return {
       personInfoImages: [
-        require("../assets/my_option.png"),
+        // require("../assets/my_option.png"),
         require("../assets/my_order.png")
       ],
       serviceImages: [
@@ -118,16 +117,16 @@ export default {
       ],
       WodeImgBg,
       isLogin: false,
-      userInfo: {}
+      userInfo: {},
+      myScore: 0
     };
   },
   methods: {
-    login: function() {},
-    getUserInfo: function() {
-      axios.get("/weixin/login", {}).then(function(response) {
-        // handle success
-        console.log(response);
-      });
+    
+    getScore: async function(){
+      const resData = await axios.get("/integral/userIntegral", {params: {userId: this.userInfo.id}});
+      console.log(resData);
+      this.myScore = resData.data.data;
     }
   }
 };
@@ -178,9 +177,19 @@ export default {
 .person-info-item {
   flex-grow: 1;
   text-align: center;
+  color: black;
+  text-decoration: none;
 }
 .person-info-img {
+  height: 33px;
 }
+.my-score {
+  height: 33px;
+  font-size: 30px;
+  font-weight: 700;
+  margin-right: 5px;
+}
+
 .person-info-image-con {
   width: 25px;
 }

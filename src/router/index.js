@@ -11,7 +11,7 @@ import MyMap from '@/components/shouye/Map'
 import CarList from '@/components/yuyue/CarList'
 import SignComponent from '@/components/shouye/CalendarPage'
 import ReferrerCar from '@/components/wode/Referrer'
-
+import ScoreDetail from '@/components/wode/ScoreDetail'
 Vue.use(Router)
 
 export default new Router({
@@ -60,6 +60,11 @@ export default new Router({
       path: '/referrer',
       name: 'referrer',
       component: ReferrerCar
+    },
+    {
+      path: '/scoredetail',
+      name: 'scoredetail',
+      component: ScoreDetail
     }
   ]
 })

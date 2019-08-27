@@ -14,7 +14,7 @@
         <FormItem label="手机号码">
           <Input v-model="phone" placeholder="请填写手机号码" />
         </FormItem>
-        <FormItem label="车辆型号2">
+        <FormItem label="车辆型号">
           <div @click.capture="chooseCarModel">
             <Input
               :disabled="true"
