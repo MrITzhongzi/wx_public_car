@@ -16,7 +16,7 @@
     <a style="padding-left: 20px;" href="/#/signcomponent">
       <Button type="info" style="background: green;">签到</Button>
     </a>
-
+    <Button type="info" @click="payMoney" style="background: green;">支付</Button>
     <Button type="info" @click="clearlocal" style="background: green;">清理缓存</Button>
 
     <Card class="box-card" shadow="never">
@@ -195,22 +195,21 @@ export default {
           title: "这是标题",
           desc: "这是描述",
           link: serverlUrl + `?userid=${loginData.userinfo.id}`,
-          imgUrl: "http://xiaopeng.natapp1.cc/logo.jpeg", // 分享图标
+          imgUrl: serverlUrl + "/logo.jpeg", // 分享图标
           success: function() {
             // 设置成功
           }
         });
         //自定义“分享到朋友圈”及“分享到QQ空间”按钮的分享内容
-         wx.updateTimelineShareData({
-          title: "这是标题", 
+        wx.updateTimelineShareData({
+          title: "这是标题",
           link: serverlUrl + `?userid=${loginData.userinfo.id}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-          imgUrl: "http://xiaopeng.natapp1.cc/logo.jpeg", // 分享图标
+          imgUrl: serverlUrl + "/logo.jpeg", // 分享图标
           success: function() {
             // 设置成功
           }
         });
       });
-
     },
     getReferrer: function(keyName) {
       let url = window.location.href.split("#")[0];
@@ -222,6 +221,63 @@ export default {
     },
     clearlocal: function() {
       localStorage.clear();
+    },
+
+    // 微信支付逻辑
+    payMoney: function() {
+      
+      if (typeof WeixinJSBridge == "undefined") {
+        
+        if (document.addEventListener) {
+          
+          document.addEventListener(
+            "WeixinJSBridgeReady",
+            onBridgeReady,
+            false
+          );
+        } else if (document.attachEvent) {
+          
+          document.attachEvent("WeixinJSBridgeReady", onBridgeReady);
+          document.attachEvent("onWeixinJSBridgeReady", onBridgeReady);
+        }
+      } else {
+        
+        this.onBridgeReady();
+      }
+    },
+    onBridgeReady: function() {
+      let localData = JSON.parse(localStorage.getItem("yhqc"));
+      alert("6:" + JSON.stringify(localData));
+      let num = Math.random().toFixed(3)* 1000
+      axios
+        .get("/wx/pay/doPay", {
+          params: {
+            openid: localData.userinfo.openId,
+            orderid: num
+          }
+        }).then(function(response) {
+          console.log(response);
+          const payData = response.data;
+          alert("7:"+JSON.stringify(payData));
+          WeixinJSBridge.invoke(
+            "getBrandWCPayRequest",
+            {
+              appId: payData.dataMap.appId, //公众号名称，由商户传入
+              timeStamp: payData.dataMap.timeStamp, //时间戳，自1970年以来的秒数
+              nonceStr: payData.dataMap.nonceStr, //随机串
+              package: payData.dataMap.package,
+              signType: payData.dataMap.signType, //微信签名方式：
+              paySign: payData.dataMap.paySign //微信签名
+            },
+            function(res) {
+              if (res.err_msg == "get_brand_wcpay_request:ok") {
+                // 使用以上方式判断前端返回,微信团队郑重提示：
+                //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
+                alert("ok");
+              }
+            }
+          );
+        });
     }
   }
 };
