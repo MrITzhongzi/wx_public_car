@@ -10,7 +10,7 @@
     </div>
     <div class="search-box">
       <Input placeholder="请输入手机号" prefix-icon="el-icon-mobile-phone" v-model="searchContent" />
-      <Button type="info" style="background: #49494B;">预约购车</Button>
+      <Button type="info" @click="subscribeCar" style="background: #49494B;">预约购车</Button>
     </div>
 
     <a style="padding-left: 20px;" href="/#/signcomponent">
@@ -211,6 +211,9 @@ export default {
         });
       });
     },
+    /**
+     * 获取userId
+     */
     getReferrer: function(keyName) {
       let url = window.location.href.split("#")[0];
       let myUrl = new URL(url);
@@ -278,6 +281,41 @@ export default {
             }
           );
         });
+    },
+    // 预约车型
+    subscribeCar: async function(){
+      const localData = JSON.parse(localStorage.getItem("yhqc"));
+      console.log(localData);
+      if(!localData) {
+        Message({
+          message: "请登录。",
+          type: "error"
+        });
+        return;
+      }
+      if(!this.searchContent) {
+        Message({
+          message: "请填写手机号。",
+          type: "error"
+        });
+        return;
+      }
+ 
+      const userId = localData.userinfo.id;
+      const name = localData.userinfo.userName;
+      const resData = await axios.get("/vehicle/saveVehicle", { params: {mobile: this.searchContent,name: name, userid: userId} });
+      if(resData.data.code == 0) {
+        Message({
+          message: "预约成功。工作人员将在一到三个工作日内与您取得联系。",
+          type: "success"
+        });
+      }else {
+        Message({
+          message: "预约失败，请稍后重试。",
+          type: "error"
+        });
+      }
+      
     }
   }
 };
