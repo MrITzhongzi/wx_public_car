@@ -88,6 +88,13 @@ export default {
         });
         return;
       }
+      if (!/^1[3456789]\d{9}$/.test(this.phone)) {
+        Message({
+          message: "手机号填写有误，请重写填写。",
+          type: "warning"
+        });
+        return;
+      }
       if (!this.chooseCarTypeValue) {
         Message({
           message: "请选择车辆型号。",
@@ -99,8 +106,10 @@ export default {
       this.reserveCar();
     },
     chooseCarModel: function() {
-
-      this.$router.push({name: "carlist", params: {name: this.name, phone: this.phone}});
+      this.$router.push({
+        name: "carlist",
+        params: { name: this.name, phone: this.phone }
+      });
     },
     initChooseCar: function() {
       if (this.$route.params.nameList && this.$route.params.idList) {
@@ -113,19 +122,25 @@ export default {
     reserveCar: async function() {
       let localData = JSON.parse(localStorage.getItem("yhqc"));
       const userId = localData.userinfo.id;
-      const resData = await axios.get("/vehicle/saveVehicle", { params: {modelId: this.modelId,mobile: this.phone,name: this.name, userid: userId} });
-      if(resData.data.code == 0) {
+      const resData = await axios.get("/vehicle/saveVehicle", {
+        params: {
+          modelId: this.modelId,
+          mobile: this.phone,
+          name: this.name,
+          userid: userId
+        }
+      });
+      if (resData.data.code == 0) {
         Message({
           message: "预约成功。工作人员将在一到三个工作日内与您取得联系。",
           type: "success"
         });
-      }else {
+      } else {
         Message({
           message: "预约失败，请稍后重试。",
           type: "error"
         });
       }
-      
     }
   }
 };

@@ -228,40 +228,36 @@ export default {
 
     // 微信支付逻辑
     payMoney: function() {
-      
       if (typeof WeixinJSBridge == "undefined") {
-        
         if (document.addEventListener) {
-          
           document.addEventListener(
             "WeixinJSBridgeReady",
             onBridgeReady,
             false
           );
         } else if (document.attachEvent) {
-          
           document.attachEvent("WeixinJSBridgeReady", onBridgeReady);
           document.attachEvent("onWeixinJSBridgeReady", onBridgeReady);
         }
       } else {
-        
         this.onBridgeReady();
       }
     },
     onBridgeReady: function() {
       let localData = JSON.parse(localStorage.getItem("yhqc"));
       alert("6:" + JSON.stringify(localData));
-      let num = Math.random().toFixed(3)* 1000
+      let num = Math.random().toFixed(3) * 1000;
       axios
         .get("/wx/pay/doPay", {
           params: {
             openid: localData.userinfo.openId,
             orderid: num
           }
-        }).then(function(response) {
+        })
+        .then(function(response) {
           console.log(response);
           const payData = response.data;
-          alert("7:"+JSON.stringify(payData));
+          alert("7:" + JSON.stringify(payData));
           WeixinJSBridge.invoke(
             "getBrandWCPayRequest",
             {
@@ -283,39 +279,47 @@ export default {
         });
     },
     // 预约车型
-    subscribeCar: async function(){
+    subscribeCar: async function() {
       const localData = JSON.parse(localStorage.getItem("yhqc"));
       console.log(localData);
-      if(!localData) {
+      if (!localData) {
         Message({
           message: "请登录。",
           type: "error"
         });
         return;
       }
-      if(!this.searchContent) {
+      if (!this.searchContent) {
         Message({
           message: "请填写手机号。",
           type: "error"
         });
         return;
       }
- 
+      if (!/^1[3456789]\d{9}$/.test(this.searchContent)) {
+        Message({
+          message: "手机号填写有误，请重写填写。",
+          type: "error"
+        });
+        return;
+      }
+
       const userId = localData.userinfo.id;
       const name = localData.userinfo.userName;
-      const resData = await axios.get("/vehicle/saveVehicle", { params: {mobile: this.searchContent,name: name, userid: userId} });
-      if(resData.data.code == 0) {
+      const resData = await axios.get("/vehicle/saveVehicle", {
+        params: { mobile: this.searchContent, name: name, userid: userId }
+      });
+      if (resData.data.code == 0) {
         Message({
           message: "预约成功。工作人员将在一到三个工作日内与您取得联系。",
           type: "success"
         });
-      }else {
+      } else {
         Message({
           message: "预约失败，请稍后重试。",
           type: "error"
         });
       }
-      
     }
   }
 };
