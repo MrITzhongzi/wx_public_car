@@ -118,10 +118,14 @@ export default {
     },
     async getDataToUpdateView(item) {
       if (this.leftSecondNavShow) {
-
         this.choosedCar.nameList.push(item.modelName);
         this.choosedCar.idList.push(item.modelId);
-        let params = {name: this.params.name, phone : this.params.phone, nameList: this.choosedCar.nameList, idList: this.choosedCar.idList};
+        let params = {
+          name: this.params.name,
+          phone: this.params.phone,
+          nameList: this.choosedCar.nameList,
+          idList: this.choosedCar.idList
+        };
         this.$router.push({ name: "subscribe", params: params });
       } else {
         await this.getCarModal(item);
@@ -144,7 +148,7 @@ export default {
       this.leftSecondNavShow = false;
       this.clearData();
     },
-    getParams: function(){
+    getParams: function() {
       this.params = this.$route.params;
     }
   },
@@ -158,7 +162,7 @@ export default {
 
 <style scoped>
 .carlist-box {
-  position: relative;
+  -webkit-overflow-scrolling: touch;
 }
 .left-nav-box,
 .left-second-nav-box {

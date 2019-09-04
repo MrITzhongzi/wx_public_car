@@ -7,11 +7,17 @@
         </a>
       </div>
     </template>
+    <div class="activity-item">
+      <a @click="getPrize">
+        <MyImage :src="Activity4Img" fit="contain"></MyImage>
+      </a>
+    </div>
   </div>
 </template>
 
 <script>
-import { Image } from "element-ui";
+import { Image, MessageBox } from "element-ui";
+import Activity4Img from "../assets/activity_4.png";
 export default {
   data: function() {
     return {
@@ -19,11 +25,20 @@ export default {
         require("../assets/activity_1.png"),
         require("../assets/activity_2.png"),
         require("../assets/activity_3.png")
-      ]
+      ],
+      Activity4Img
     };
   },
   components: {
     MyImage: Image
+  },
+  methods: {
+    getPrize: function() {
+      MessageBox.alert("恭喜您，兑换成功，工作人员将会在一到三个工作日内与您取得联系。", "提示", {
+        confirmButtonText: "确定",
+        callback: action => {}
+      });
+    }
   }
 };
 </script>
