@@ -43,7 +43,7 @@
             </div>
           </div>
         </a>
-        <div class="service-item">
+        <a class="service-item" href="tel:17616231181">
           <div class="ser-item-left">
             <MyImage :src="serviceImages[0]" class="service-item-image"></MyImage>
             <div class="ser-item-desc">联系客服</div>
@@ -54,31 +54,8 @@
               <i class="el-icon-arrow-right"></i>
             </div>
           </div>
-        </div>
-        <div class="service-item">
-          <div class="ser-item-left">
-            <MyImage :src="serviceImages[1]" class="service-item-image"></MyImage>
-            <div class="ser-item-desc">联系客服</div>
-          </div>
-          <div class="ser-item-right">
-            <!-- <div class="ser-item-right-desc">周一至周五 9:00~18:00</div> -->
-            <div class="ser-item-right-icon">
-              <i class="el-icon-arrow-right"></i>
-            </div>
-          </div>
-        </div>
-        <div class="service-item">
-          <div class="ser-item-left">
-            <MyImage :src="serviceImages[2]" class="service-item-image"></MyImage>
-            <div class="ser-item-desc">联系客服</div>
-          </div>
-          <div class="ser-item-right">
-            <!-- <div class="ser-item-right-desc">周一至周五 9:00~18:00</div> -->
-            <div class="ser-item-right-icon">
-              <i class="el-icon-arrow-right"></i>
-            </div>
-          </div>
-        </div>
+        </a>
+      
       </div>
     </div>
   </div>

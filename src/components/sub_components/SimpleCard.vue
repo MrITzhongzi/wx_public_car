@@ -2,7 +2,7 @@
   <div class="lhw-simple-card">
     <div class="left-con" @click="goMap">
       <div class="con-detail">山东烟台莱山区.体验店</div>
-      <div class="con-desc">山东烟台烟台市莱山区万光小区18号楼</div>
+      <div class="con-desc">烟台市芝罘区通世南路227号1号楼</div>
     </div>
     <div class="right-icon">
       <i class="el-icon-arrow-right"></i>

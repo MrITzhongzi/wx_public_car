@@ -21,11 +21,11 @@ export default {
   data() {
     return {
       label: {
-        content: "测试label",
+        content: "烟台市芝罘区通世南路227号1号楼",
         offset: [10, 12]
       },
       zoom: 15,
-      center: [121.451854, 37.477066],
+      center: [121.372523,37.458349],
       
       plugin: [
         "ToolBar",

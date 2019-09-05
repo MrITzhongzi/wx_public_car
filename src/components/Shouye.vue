@@ -245,7 +245,7 @@ export default {
     },
     onBridgeReady: function() {
       let localData = JSON.parse(localStorage.getItem("yhqc"));
-      alert("6:" + JSON.stringify(localData));
+     
       let num = Math.random().toFixed(3) * 1000;
       axios
         .get("/wx/pay/doPay", {
@@ -257,7 +257,7 @@ export default {
         .then(function(response) {
           console.log(response);
           const payData = response.data;
-          alert("7:" + JSON.stringify(payData));
+          
           WeixinJSBridge.invoke(
             "getBrandWCPayRequest",
             {
@@ -272,7 +272,7 @@ export default {
               if (res.err_msg == "get_brand_wcpay_request:ok") {
                 // 使用以上方式判断前端返回,微信团队郑重提示：
                 //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
-                alert("ok");
+                
               }
             }
           );
