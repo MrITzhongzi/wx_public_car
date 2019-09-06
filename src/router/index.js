@@ -12,6 +12,7 @@ import CarList from '@/components/yuyue/CarList'
 import SignComponent from '@/components/shouye/CalendarPage'
 import ReferrerCar from '@/components/wode/Referrer'
 import ScoreDetail from '@/components/wode/ScoreDetail'
+import PurpostCar from '@/components/wode/PurposeCar'
 Vue.use(Router)
 
 export default new Router({
@@ -65,6 +66,11 @@ export default new Router({
       path: '/scoredetail',
       name: 'scoredetail',
       component: ScoreDetail
+    },
+    {
+      path: '/purposecar',
+      name: 'purposecar',
+      component: PurpostCar
     }
   ]
 })

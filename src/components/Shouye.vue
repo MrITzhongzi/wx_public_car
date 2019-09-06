@@ -1,9 +1,9 @@
 <template>
   <div class="shouye-box">
     <div class="top-carousel">
-      <Carousel :autoplay="true" height="200px">
+      <Carousel :autoplay="true" height="150px">
         <CarouselItem v-for="item in 4" :key="item" class="shouye-carousel-img">
-          <MyImage :src="carouselSrc" fit="cover"></MyImage>
+          <div><img :src="carouselSrc" :style="{width: '100%'}" alt=""></div>
           <!-- <img :src="carouselSrc" alt=""> -->
         </CarouselItem>
       </Carousel>
@@ -16,7 +16,7 @@
     <a style="padding-left: 20px;" href="/#/signcomponent">
       <Button type="info" style="background: green;">签到</Button>
     </a>
-    <Button type="info" @click="payMoney" style="background: green;">支付</Button>
+    <!-- <Button type="info" @click="payMoney" style="background: green;">支付</Button> -->
     <!-- <Button type="info" @click="clearlocal" style="background: green;">清理缓存</Button> -->
 
     <Card class="box-card" shadow="never">
