@@ -43,9 +43,7 @@
       </div>
     </Card>
 
-    <div class="our-advantage">
-      <ImgCard></ImgCard>
-    </div>
+    
   </div>
 </template>
 
@@ -60,7 +58,7 @@ import {
   Message
 } from "element-ui";
 import SimpleCard from "@/components/sub_components/SimpleCard";
-import ImgCard from "@/components/sub_components/ImgCard.vue";
+
 import HotCarItem from "@/components/shouye/HotCarItem";
 import axios from "axios";
 import wx from "weixin-js-sdk";
@@ -95,7 +93,6 @@ export default {
     Button,
     Card,
     SimpleCard,
-    ImgCard,
     HotCarItem
   },
   data: function() {
@@ -192,8 +189,8 @@ export default {
       wx.ready(function() {
         //自定义“分享给朋友”及“分享到QQ”按钮的分享内容
         wx.updateAppMessageShareData({
-          title: "这是标题",
-          desc: "这是描述",
+          title: "英豪汽车商城",
+          desc: "玩转汽车生态，就在英豪汽车商城。",
           link: serverlUrl + `?userid=${loginData.userinfo.id}`,
           imgUrl: serverlUrl + "/logo.jpeg", // 分享图标
           success: function() {
@@ -202,7 +199,7 @@ export default {
         });
         //自定义“分享到朋友圈”及“分享到QQ空间”按钮的分享内容
         wx.updateTimelineShareData({
-          title: "这是标题",
+          title: "英豪汽车商城",
           link: serverlUrl + `?userid=${loginData.userinfo.id}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
           imgUrl: serverlUrl + "/logo.jpeg", // 分享图标
           success: function() {
@@ -379,7 +376,5 @@ export default {
   box-sizing: border-box;
   margin-top: 20px;
 }
-.our-advantage {
-  margin-top: 50px;
-}
+
 </style>

@@ -17,7 +17,7 @@
         </template>
       </div>
 
-      <div class="person-infos" >
+      <div class="person-infos">
         <a class="person-info-item" href="#/scoredetail">
           <div class="my-score">{{isLogin ? myScore : 0}}</div>
           <div class="person-info-desc">我的积分</div>
@@ -67,7 +67,9 @@
             </div>
           </div>
         </a>
-      
+      </div>
+      <div class="our-advantage">
+        <ImgCard></ImgCard>
       </div>
     </div>
   </div>
@@ -77,10 +79,11 @@
 import { Image } from "element-ui";
 import axios from "axios";
 import WodeImgBg from "../assets/banner_bg_v2.png";
-
+import ImgCard from "@/components/sub_components/ImgCard.vue";
 export default {
   components: {
-    MyImage: Image
+    MyImage: Image,
+    ImgCard
   },
   mounted: function() {
     let loginData = JSON.parse(localStorage.getItem("yhqc"));
@@ -111,9 +114,10 @@ export default {
     };
   },
   methods: {
-    
-    getScore: async function(){
-      const resData = await axios.get("/integral/userIntegral", {params: {userId: this.userInfo.id}});
+    getScore: async function() {
+      const resData = await axios.get("/integral/userIntegral", {
+        params: { userId: this.userInfo.id }
+      });
       console.log(resData);
       this.myScore = resData.data.data;
     }
@@ -218,5 +222,8 @@ export default {
 }
 .ser-item-right-icon {
   font-size: 15px;
+}
+.our-advantage {
+  margin-top: 50px;
 }
 </style>

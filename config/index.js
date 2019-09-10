@@ -12,8 +12,8 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/': {//代理api  代理所有的接口
-        // target: "http://xiaopeng.natapp1.cc", //测试
-        target: "http://wx.yinghaoauto.cn",//正式
+        target: "http://xiaopeng.natapp1.cc", //测试
+        // target: "http://wx.yinghaoauto.cn",//正式
         changeOrigin: true,//是否跨域
         ws: false, // proxy websockets
         pathRewrite: {//重写路径

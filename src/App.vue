@@ -78,7 +78,7 @@ export default {
       shouyePaths: ["/", "/map","/signcomponent"],
       yuyuePaths: ["/subscribe","/carlist"],
       huodongPaths: ["/activity"],
-      myPaths: ["/my", "/referrer"],
+      myPaths: ["/my", "/referrer", "/purposecar"],
       loadAnimated: false
     };
   },

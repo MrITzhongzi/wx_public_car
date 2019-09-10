@@ -7,7 +7,7 @@
       <div class="score-item" v-for="(item, index) in scoreList" :key="index">
         <div class="score-item-left">
           <div class="get-score-shengyu">剩余<span>{{item.balance}}</span></div>
-          <div class="get-score-time">{{new Date(1566465753000).toLocaleString()}}</div>
+          <div class="get-score-time">{{new Date(item.createDate).toLocaleString()}}</div>
         </div>
         <div class="score-item-right">
           <div class="get-score-type">{{item.integralType == 1 ? "用户签到" : "积分兑换"}}</div>
@@ -60,9 +60,11 @@ export default {
   font-weight: 700;
   color: black;
   text-align: center;
+  background: #e2dede;
 }
 .score-list {
   background: #f7f7f7;
+  margin-top: 10px;
 }
 .list-title {
   font-size: 20px;
