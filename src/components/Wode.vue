@@ -67,6 +67,18 @@
             </div>
           </div>
         </a>
+        <div class="service-item" >
+          <div class="ser-item-left">
+            <MyImage :src="serviceImages[3]" class="service-item-image"></MyImage>
+            <div class="ser-item-desc">清理缓存</div>
+          </div>
+          <div class="ser-item-right">
+            
+            <div class="ser-item-right-icon">
+              <i class="el-icon-arrow-right"></i>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="our-advantage">
         <ImgCard></ImgCard>
@@ -105,7 +117,8 @@ export default {
       serviceImages: [
         require("../assets/service.png"),
         require("../assets/share.png"),
-        require("../assets/safety.png")
+        require("../assets/safety.png"),
+        require("../assets/saoba.png")
       ],
       WodeImgBg,
       isLogin: false,
@@ -120,6 +133,9 @@ export default {
       });
       console.log(resData);
       this.myScore = resData.data.data;
+    },
+    clearlocal: function() {
+      localStorage.clear();
     }
   }
 };

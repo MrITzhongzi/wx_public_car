@@ -1,12 +1,12 @@
 <template>
   <div class="activity-list">
-    <template v-for="(item, index) in activityImgs">
+    <!-- <template v-for="(item, index) in activityImgs">
       <div class="activity-item" :key="index">
         <a href="#/sign">
           <MyImage :src="item" fit="contain"></MyImage>
         </a>
       </div>
-    </template>
+    </template> -->
     <div class="activity-item">
       <a @click="getPrize">
         <MyImage :src="Activity4Img" fit="contain"></MyImage>

@@ -3,7 +3,7 @@
     <div class="hot-car-left">
       <MyImage
         class="caritem-image"
-        src="http://thirdwx.qlogo.cn/mmopen/vi_32/hBbNOLicWdz4LNDHtqDXjRZdGNxNW0Uia58G8ZnOafO3WbQjTqWMDNPW31m3HWlYGlHVfBiaV9zj3zsSk9icyZpSog/132"
+        :src="carItem.modelImage"
       ></MyImage>
     </div>
     <div class="hot-car-middle">

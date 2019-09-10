@@ -17,7 +17,7 @@
       <Button type="info" style="background: green;">签到</Button>
     </a>
     <!-- <Button type="info" @click="payMoney" style="background: green;">支付</Button> -->
-    <!-- <Button type="info" @click="clearlocal" style="background: green;">清理缓存</Button> -->
+    
 
     <Card class="box-card" shadow="never">
       <div slot="header" class="clearfix">
@@ -219,9 +219,7 @@ export default {
       console.log(userid);
       this.userId = userid ? userid : 0;
     },
-    clearlocal: function() {
-      localStorage.clear();
-    },
+
 
     // 微信支付逻辑
     payMoney: function() {
