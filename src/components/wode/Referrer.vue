@@ -25,7 +25,9 @@ export default {
   },
   methods: {
     getUser: async function() {
-        let resData = await axios.get("/user/getUserSpread", {params: {userId: "59"}})
+      const localData = JSON.parse(localStorage.getItem("yhqc"));
+      const userId = localData.userinfo.id;
+        let resData = await axios.get("/user/getUserSpread", {params: {userId: userId}})
         if(resData.data.code == "0") {
             this.userList = resData.data.data;
         }
